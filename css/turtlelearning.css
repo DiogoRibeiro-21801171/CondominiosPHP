@@ -1,0 +1,155 @@
+/*---------------------------------------------------------------*/
+/* TurtleLearning.com */
+#rodape {
+  border-top: thin solid black;
+}
+#colunameio {
+  /*display: inline-block;*/
+  /*width: 77%;*/
+  margin-top: 5px; /*define a margem à volta da div*/
+  margin-right:5px;
+  margin-bottom:5px;
+  margin-left:5px;
+  padding-top:5px; /*distância do bordo ao conteúdo*/
+  padding-right:5px;
+  padding-bottom:5px;
+  padding-left:5px;
+  border-left: thin dashed black;
+  /*border-right: thin solid black;*/
+  border-top: thin dashed black;
+}
+#rodape {
+    font-size: small;
+}
+#fichabibliografica {
+	border-top: thin dashed black;
+}
+h1 {
+    color: blue;
+}
+h2 {
+    color: blue;
+}
+h3 {
+    border-top: thin dashed black;
+    color: blue;
+}
+h4 {
+    color: blue;
+}
+h5 {
+    color: blue;
+}
+h6 {
+    color: blue;
+}
+h7 {
+    color: blue;
+}
+pre {
+	tab-size: 4;
+	-moz-tab-size: 4;
+	-o-tab-size: 4;
+}
+.comentario {
+	background: #ffffcc;
+	border: 1px solid;
+	border-radius: 15px 15px 15px 15px;
+	width: 90%;
+	margin-left: 20px;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+.boaideia {
+	background: #ffff66;
+	border: 1px solid;
+	border-radius: 15px 15px 15px 15px;
+	width: 90%;
+	margin-left: 20px;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+.jstree-default-small > .jstree-container-ul > .jstree-node {
+	font-size: 12px;
+}
+.borda {
+	border: 1px solid;
+	padding:10px 10px 10px 10px; 
+}
+img {
+    max-width: 100%;
+    height: auto;
+}
+.msgErro {
+    font-family : Verdana, Geneva, Arial, Helvetica, sans-serif;
+    font-size : 12px;
+    color : #ff0000;
+    border: solid thin #ff0000;
+    margin: 1em;
+    width: 90%
+}
+table {
+  margin-top:10px; /*define a margem à volta da tabela (green)*/
+  margin-right:10px;
+  margin-bottom:10px;
+  margin-left:10px;
+  padding-top:2px; /*distância do bordo ao conteúdo (red)*/
+  padding-right:2px;
+  padding-bottom:2px;
+  padding-left:2px;
+}
+td {
+  padding:2px 2px 2px 2px; /*distância do bordo ao texto*/
+} 
+.tabela2 {
+  border: 3px solid blue;
+  margin-top:10px; /*define a margem à volta da tabela (green)*/
+  margin-right:10px;
+  margin-bottom:10px;
+  margin-left:10px;
+  padding-top:3px; /*distância do bordo ao conteúdo (red)*/
+  padding-right:3px;
+  padding-bottom:3px;
+  padding-left:3px;
+}
+.quadricula1 {
+  border:1px solid blue;
+  padding:3px 3px 3px 3px; /*distância do bordo ao texto*/
+  text-align: right;
+}
+.quadricula2 {
+  border:1px solid blue;
+  padding:3px 3px 3px 3px; /*distância do bordo ao texto*/
+  min-width: 80px;
+}
+
+/* estilos da árvore */
+.turtlelearningtree {
+	font: 9pt sans-serif;
+	color: navy;
+}
+.branch {
+	cursor: pointer;
+	cursor: hand;
+	display: block;
+}
+.leaf {
+	display: none;
+	margin-left: 16px;
+}
+a{
+	text-decoration: none;
+}
+a:hover{
+	text-decoration: underline;
+}
+.treeHighLight {
+	
+	color: #ff8000;
+	/*
+	color: #2eb82e;
+	color: #ff8000;
+	background-color: #b2b2b2;
+	background-color: rgba(0, 0, 0, .2);
+	*/
+}
