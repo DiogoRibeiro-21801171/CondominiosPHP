@@ -1,7 +1,7 @@
 <?php
 class Despesa_DataHandler {
 
-    private $connection;
+    private $connection; 
     
     //------------------------------------------------------------------------------------
     

@@ -1,7 +1,7 @@
 <?php
 class Quota_DataHandler {
 
-    private $connection;
+    private $connection; 
     
     //------------------------------------------------------------------------------------
     

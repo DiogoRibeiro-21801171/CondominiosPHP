@@ -6,7 +6,7 @@ if (!isset($_SESSION["tipoUtilizador"]) || strcmp($_SESSION["tipoUtilizador"], "
     exit();
 }
 ?>
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="pt">
 <head>
 <title>Pesquisa de pagamento</title>
