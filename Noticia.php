@@ -22,7 +22,10 @@ var currentLeaf = 'Noticias';
 </script>
 <?php require 'inc_head03.inc'; ?>
 <!-- .................................................................................................................................. -->
-<h2>Noticias</h2>
+<div class="clearfix">
+    <h2>Noticias</h2>
+    <a href="#" class="btn btn-success pull-right">Criar Noticia</a>
+</div>
 
 <?php
 if ((isset($_SESSION["idcondominio"]) == 0)) {
