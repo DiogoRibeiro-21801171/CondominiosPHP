@@ -10,18 +10,18 @@ if (!isset($_SESSION["tipoUtilizador"]) || strcmp($_SESSION["tipoUtilizador"], "
 <html lang="pt">
 <head>
 <title>Lista de pagamentos em atraso</title>
-<?php require 'inc_head01.inc'; ?>
+<?php require 'templates/inc_head01.inc'; ?>
 </head>
 <body onload="cleanOnLoad()">
-<?php require 'inc_head02.inc'; ?>
+<?php require 'templates/inc_head02.inc'; ?>
 <!-- place the tree building script where you'd like in the body -->
 <script>
 /*Choose current leaf - must be done before create tree*/
 var currentLeaf = 'Quotas em atraso';
-<?php require 'inc_tree.inc'; ?>
+<?php require 'templates/inc_tree.inc'; ?>
 showBranch('branch025000000');
 </script>
-<?php require 'inc_head03.inc'; ?>
+<?php require 'templates/inc_head03.inc'; ?>
 <!-- .................................................................................................................................. -->
 <h2>Lista de quotas em atraso</h2>
 
@@ -62,8 +62,8 @@ $_SESSION["msg"] = "";
 <hr>
 <?php
 if (!empty($ano)) {
-    require 'Quota_DataHandler.php';
-    require 'inc_db.inc';
+    require 'dataHandler/Quota_DataHandler.php';
+    require 'templates/inc_db.inc';
     //print("<h3>Pagamentos em atraso <input type=\"checkbox\" id=\"obj_03\" onclick=\"showHide(this)\" class=\"mycheckbox\" ></h3>");
     //print("<div id=\"obj_03_tb\" style=\"display:none\">");
     print("<h3>Pagamentos em atraso</h3>");
@@ -73,6 +73,6 @@ if (!empty($ano)) {
 }
 ?>
 <!-- .................................................................................................................................. -->	
-<?php require 'inc_head04.inc'; ?>
+<?php require 'templates/inc_head04.inc'; ?>
 </body>
 </html>

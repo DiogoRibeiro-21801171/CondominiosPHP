@@ -69,7 +69,7 @@ class Noticia_DataHandler {
         </th>
         <th >
         <!-- ACAO -->
-            AÇÃO
+            Ação
         </th>
         \n");
         print ("</tr>");
@@ -83,7 +83,7 @@ class Noticia_DataHandler {
                 <!-- 'delete.php?id=\\" . $idnoticia . "'-->
                 <a href='#' title='Editar Noticia' data-toggle='tooltip'><span class='glyphicon glyphicon-pencil'></span></a>
                 <a href='#' title='Eliminar Noticia' data-toggle='tooltip'><span class='glyphicon glyphicon-trash'></span></a>
-                </td>' \n",
+                </td>\n",
                 $data, $noticia);
             print ("</tr>\n");
         }

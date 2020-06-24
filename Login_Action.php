@@ -1,6 +1,6 @@
 <?php
-require "UtilizadorAplicacao_DataHandler.php";
-require 'inc_db.inc';
+require "dataHandler/UtilizadorAplicacao_DataHandler.php";
+require 'templates/inc_db.inc';
 session_start();
 //$loginUsername = $_GET["loginUsername"]; //para evitar SQL Injection usar o código abaixo
 $loginUsername = filter_input(INPUT_GET, 'loginUsername', FILTER_SANITIZE_SPECIAL_CHARS);

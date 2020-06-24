@@ -32,7 +32,7 @@ class Quota_DataHandler {
     }
     
     //------------------------------------------------------------------------------------
-    
+    // Detalhe pagamentos de quotas
     function pesquisaPagamentoQuotas($idcondominioP, $idfracaoP, $anoP) {
 
         $query = "select p.idfracao, " .
@@ -75,10 +75,21 @@ class Quota_DataHandler {
         /* transportar os valores */
         /* nas expressões abaixo é mais rápido fazer print ('<table>\n'); mas neste caso o PHP não vai interpretar \n como fim de linha */
         /* quando colocamos print("<table>\n"); o PHP faz uma análise ao argumento e deteta o fim de linha */
-        print ("<table class='tabela2'>\n");
-        print ("<tr>");
-        print ("<th class='quadricula2'>Fração</th><th class='quadricula2'>Tipo de quota</th><th class='quadricula2'>Forma pagamento</th><th class='quadricula2'>Data limite pagamento</th><th class='quadricula2'>Data pagamento</th><th class='quadricula2'>Valor a pagar</th><th class='quadricula2'>Valor pago</th><th class='quadricula2'>Comentário</th><th class='quadricula2'>Problema com pagamento</th>\n");
-        print ("</tr>");
+        print ("<table class='table table-bordered table-striped'>\n");
+        print ("<tr>\n");
+        print ("
+            <th>Fração</th>
+            <th>Tipo de quota</th>
+            <th>Forma pagamento</th>
+            <th>Data limite pagamento</th>
+            <th>Data pagamento</th>
+            <th>Valor a pagar</th>
+            <th>Valor pago</th>
+            <th>Comentário</th>
+            <th>Problema com pagamento</th>
+            <th>Ação</th>
+            \n");
+        print ("</tr>\n");
         while (mysqli_stmt_fetch($stmt)) {
             if (!empty($valorapagar)) {
                 $valorapagarS = number_format($valorapagar,2,'.',' ');
@@ -93,8 +104,18 @@ class Quota_DataHandler {
                 $idformapagamento = "";
             }
             print ("<tr>\n");
-            printf("<td class='quadricula2'>%s</td><td class='quadricula2'>%s</td><td class='quadricula2'>%s</td><td class='quadricula2'>%s</td><td class='quadricula2'>%s</td><td class='quadricula1'>%s</td><td class='quadricula1'>%s</td><td class='quadricula2'>%s</td>", 
-                $idfracao, $idtipoquota, $idformapagamento, $datalimite, $datapagamento, $valorapagarS, $valorpagoS, $comentario);
+            printf("
+                <td>%s</td>
+                <td>%s</td>
+                <td>%s</td>
+                <td>%s</td>
+                <td>%s</td>
+                <td>%s</td>
+                <td>%s</td>
+                <td>%s</td>\n",
+                $idfracao, $idtipoquota, $idformapagamento, $datalimite,
+                $datapagamento, $valorapagarS, $valorpagoS, $comentario);
+
             if (empty($datapagamento) and $datalimite<date("Y-m-d")) {
                 $problemapagamento = "Pagamento em atraso";
             } else {
@@ -109,7 +130,13 @@ class Quota_DataHandler {
                     }
                 }
             }
-            printf("<td class='quadricula2'>%s</td>\n",$problemapagamento);
+            printf("
+                <td>%s</td>
+                <td>
+                    <a href='#' title='Editar Detalhe_Pagamento_Quota' data-toggle='tooltip'><span class='glyphicon glyphicon-pencil'></span></a>
+                    <a href='#' title='Eliminar Detalhe_Pagamento_Quota' data-toggle='tooltip'><span class='glyphicon glyphicon-trash'></span></a>
+                </td>
+                \n", $problemapagamento);
             print ("</tr>\n");
         }
         print ("</table>\n");
@@ -117,7 +144,6 @@ class Quota_DataHandler {
         mysqli_stmt_close($stmt);
         mysqli_close($this->connection);
     }
-    
     //------------------------------------------------------------------------------------
     
     function pesquisaPagamentoQuotasExtra($idcondominioP, $idfracaoP, $anoP) {
@@ -160,9 +186,20 @@ class Quota_DataHandler {
         /* transportar os valores */
         /* nas expressões abaixo é mais rápido fazer print ('<table>\n'); mas neste caso o PHP não vai interpretar \n como fim de linha */
         /* quando colocamos print("<table>\n"); o PHP faz uma análise ao argumento e deteta o fim de linha */
-        print ("<table class='tabela2'>\n");
+        print ("<table class='table table-bordered table-striped'>\n");
         print ("<tr>");
-        print ("<th class='quadricula2'>Fração</th><th class='quadricula2'>Tipo quota</th><th class='quadricula2'>Forma pagamento</th><th class='quadricula2'>Data limite pagamento</th><th class='quadricula2'>Data pagamento</th><th class='quadricula2'>Valor a pagar</th><th class='quadricula2'>Valor pago</th><th class='quadricula2'>Comentário</th><th class='quadricula2'>Problema com pagamento</th>\n");
+        print ("
+            <th>Fração</th>
+            <th>Tipo quota</th>
+            <th>Forma pagamento</th>
+            <th>Data limite pagamento</th>
+            <th>Data pagamento</th>
+            <th>Valor a pagar</th>
+            <th>Valor pago</th>
+            <th>Comentário</th>
+            <th>Problema com pagamento</th>
+            <th>Ação</th>
+            \n");
         print ("</tr>");
         while (mysqli_stmt_fetch($stmt)) {
             if (!empty($valorapagar)) {
@@ -178,8 +215,18 @@ class Quota_DataHandler {
                 $idformapagamento = "";
             }
             print ("<tr>\n");
-            printf("<td class='quadricula2'>%s</td><td class='quadricula2'>%s</td><td class='quadricula2'>%s</td><td class='quadricula2'>%s</td><td class='quadricula2'>%s</td><td class='quadricula1'>%s</td><td class='quadricula1'>%s</td><td class='quadricula2'>%s</td>",
-                $idfracao, $idtipoquota, $idformapagamento, $datalimite, $datapagamento, $valorapagarS, $valorpagoS, $comentario);
+            printf("
+                <td>%s</td>
+                <td>%s</td>
+                <td>%s</td>
+                <td>%s</td>
+                <td>%s</td>
+                <td>%s</td>
+                <td>%s</td>
+                <td>%s</td>",
+                $idfracao, $idtipoquota, $idformapagamento, $datalimite,
+                $datapagamento, $valorapagarS, $valorpagoS, $comentario);
+
             if (empty($datapagamento) and $datalimite<date("Y-m-d")) {
                 $problemapagamento = "Pagamento em atraso";
             } else {
@@ -194,7 +241,13 @@ class Quota_DataHandler {
                     }
                 }
             }
-            printf("<td class='quadricula2'>%s</td>\n",$problemapagamento);
+            printf("
+                <td>%s</td>
+                <td>
+                    <a href='#' title='Editar Detalhe_Pagamento_Quota_Extra' data-toggle='tooltip'><span class='glyphicon glyphicon-pencil'></span></a>
+                    <a href='#' title='Eliminar Detalhe_Pagamento_Quota_Extra' data-toggle='tooltip'><span class='glyphicon glyphicon-trash'></span></a>
+                </td>
+                \n", $problemapagamento);
             print ("</tr>\n");
         }
         print ("</table>\n");
@@ -254,7 +307,6 @@ class Quota_DataHandler {
             "order by if(length(t1.idfracao)=2,concat('0',t1.idfracao),t1.idfracao)";
         }
 
-        
         if (empty($ano)) {
             $ano = date("Y") . "%";
         }
@@ -288,9 +340,17 @@ class Quota_DataHandler {
         /* transportar os valores */
         /* nas expressões abaixo é mais rápido fazer print ('<table>\n'); mas neste caso o PHP não vai interpretar \n como fim de linha */
         /* quando colocamos print("<table>\n"); o PHP faz uma análise ao argumento e deteta o fim de linha */
-        print ("<table class='tabela2'>\n");
+        print ("<table class='table table-bordered table-striped'>\n");
         print ("<tr>\n");
-        print ("<th class='quadricula2'>Fração</th><th class='quadricula2'>Trimestre 1</th><th class='quadricula2'>Trimestre 2</th><th class='quadricula2'>Trimestre 3</th><th class='quadricula2'>Trimestre 4</th><th class='quadricula2'>Poblema com pagamento</th>\n");
+        print ("
+            <th>Fração</th>
+            <th>Trimestre 1</th>
+            <th>Trimestre 2</th>
+            <th>Trimestre 3</th>
+            <th>Trimestre 4</th>
+            <th>Poblema com pagamento</th>
+            <th>Ação</th>
+            \n");
         print ("</tr>\n");
         while (mysqli_stmt_fetch($stmt)) {
             if (!empty($t1)) {
@@ -314,7 +374,18 @@ class Quota_DataHandler {
                 $t4S = "";
             }
             print ("<tr>\n");
-            printf("<td class='quadricula2'>%s</td><td class='quadricula1'>%s</td><td class='quadricula1'>%s</td><td class='quadricula1'>%s</td><td class='quadricula1'>%s</td><td class='quadricula2'>%s</td>\n",
+            printf("
+                <td>%s</td>
+                <td>%s</td>
+                <td>%s</td>
+                <td>%s</td>
+                <td>%s</td>
+                <td>%s</td>
+                <td>
+                    <a href='#' title='Editar Mapa_Resumo_Quota' data-toggle='tooltip'><span class='glyphicon glyphicon-pencil'></span></a>
+                    <a href='#' title='Eliminar Mapa_Resumo_Quota' data-toggle='tooltip'><span class='glyphicon glyphicon-trash'></span></a>
+                </td>
+                \n",
                 $idfracao, $t1S, $t2S, $t3S, $t4S, $prob);
             print ("</tr>\n");
         }
@@ -377,16 +448,34 @@ class Quota_DataHandler {
         /* transportar os valores */
         /* nas expressões abaixo é mais rápido fazer print ('<table>\n'); mas neste caso o PHP não vai interpretar \n como fim de linha */
         /* quando colocamos print("<table>\n"); o PHP faz uma análise ao argumento e deteta o fim de linha */
-        print ("<table class='tabela2'>\n");
+        print ("<table class='table table-bordered table-striped'>\n");
         print ("<tr>");
-        print ("<th class='quadricula2'>Fração</th><th class='quadricula2'>Ano</th><th class='quadricula2'>Divida de despesa normal</th><th class='quadricula2'>Divida de despesa extra</th><th class='quadricula2'>Divida total</th>\n");
+        print ("
+            <th>Fração</th>
+            <th>Ano</th>
+            <th>Divida de despesa normal</th>
+            <th>Divida de despesa extra</th>
+            <th>Divida total</th>
+            <th>Ação</th>
+            \n");
         print ("</tr>");
         while (mysqli_stmt_fetch($stmt)) {
             $divida_despesa_normalS = number_format($divida_despesa_normal,2,'.',' ');
             $divida_despesa_extraS  = number_format($divida_despesa_extra,2,'.',' ');
             $divida_totalS          = number_format($divida_total,2,'.',' ');
             print ("<tr>\n");
-            printf("<td class='quadricula2'>%s</td><td class='quadricula2'>%s</td><td class='quadricula1'>%s</td><td class='quadricula1'>%s</td><td class='quadricula1'>%s</td>\n", $fracao, $ano, $divida_despesa_normalS, $divida_despesa_extraS, $divida_totalS);
+            printf("
+                <td>%s</td>
+                <td>%s</td>
+                <td>%s</td>
+                <td>%s</td>
+                <td>%s</td>
+                <td>
+                    <a href='#' title='Editar Quotas_Atraso' data-toggle='tooltip'><span class='glyphicon glyphicon-pencil'></span></a>
+                    <a href='#' title='Eliminar Quotas_Atraso' data-toggle='tooltip'><span class='glyphicon glyphicon-trash'></span></a>
+                </td>
+                \n",
+                $fracao, $ano, $divida_despesa_normalS, $divida_despesa_extraS, $divida_totalS);
             print ("</tr>\n");
         }
         print ("</table>\n");
