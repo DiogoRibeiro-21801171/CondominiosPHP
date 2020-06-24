@@ -24,7 +24,8 @@ var currentLeaf = 'Noticias';
 <!-- .................................................................................................................................. -->
 <div class="clearfix">
     <h2>Noticias</h2>
-    <a href="#" class="btn btn-success pull-right">Criar Noticia</a>
+    <a class="btn btn-success pull-right" data-toggle="modal" data-target="#eliminarNoticia">Criar Noticia</a>
+
 </div>
 
 <?php
@@ -41,6 +42,30 @@ require 'dataHandler/Noticia_DataHandler.php';
 require 'templates/inc_db.inc';
 $noticiadatahandler = new Noticia_DataHandler($dbHostName, $dbDatabaseName, $dbUsername, $dbPassword);
 $noticiadatahandler->listaNoticias($idcondominio);
+
+print ("
+    <!-- Apagar Noticia -->
+    <div class=\"modal fade\" id=\"eliminarNoticia\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"eliminarNoticiaLabel\" aria-hidden=\"true\">
+        <div class=\"modal-dialog\" role=\"document\">
+            <div class=\"modal-content\">
+                <div class=\"modal-header\">
+                    <h5 class=\"modal-title\" id=\"eliminarNoticiaLabel\">Eliminar Noticia</h5>
+                    <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Fechar\">
+                        <span aria-hidden=\"true\">&times;</span>
+                    </button>
+                </div>
+                <div class=\"modal-body\">
+                    Pretende eliminar esta noticia?
+                </div>
+                <div class=\"modal-footer\">
+                    <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Cancelar</button>
+                    <button onclick='' type=\"button\" class=\"btn btn-danger\">Eliminar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+")
+
 ?>
 <!-- .................................................................................................................................. -->	
 <?php require 'templates/inc_head04.inc'; ?>

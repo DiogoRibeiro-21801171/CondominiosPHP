@@ -34,4 +34,9 @@ function showHide(me) {
 	   idObjShow2.style.display = 'none';
 	}
 }
+
+function funcao($idnoticia) {
+
+}
+
 </script>
