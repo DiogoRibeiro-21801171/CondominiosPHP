@@ -17,7 +17,7 @@ class Problema_DataHandler {
             $_SESSION["msg"] = "Não consegui criar a ligação à BD! <br> " . mysqli_connect_errno() . "-" . mysqli_connect_error();
             //mensagem de erro para cliente
             //$_SESSION["msg"] = "Não consegui criar a ligação à BD! <br> ";
-            header("Location: login.php");
+            header("Location: Login.php");
             exit();
         }
         
@@ -26,7 +26,7 @@ class Problema_DataHandler {
             $_SESSION["msg"] = '<div class="msgErro">Não consegui carregar character set utf8: ' . mysqli_error($this->connection);
             //mensagem de erro para cliente
             //$_SESSION["msg"] = '<div class="msgErro">Não consegui carregar character set utf8: ';
-            header("Location: login.php");
+            header("Location: Login.php");
             exit();
         }
     }
@@ -88,13 +88,30 @@ class Problema_DataHandler {
         /* transportar os valores */
         /* nas expressões abaixo é mais rápido fazer print ('<table>\n'); mas neste caso o PHP não vai interpretar \n como fim de linha */
         /* quando colocamos print("<table>\n"); o PHP faz uma análise ao argumento e deteta o fim de linha */
-        print ("<table class='tabela2'>\n");
+        print ("<table class='table table-bordered table-striped'>\n");
         print ("<tr>");
-        print ("<th class='quadricula2'>Id problema</th><th class='quadricula2'>Data abertura</th><th class='quadricula2'>Data resolução</th><th class='quadricula2'>Prioridade</th><th class='quadricula2'>Status</th><th class='quadricula2'>Descricao</th><th class='quadricula2'>Comentários</th>\n");
+        print ("
+            <th>Id problema</th>
+            <th>Data abertura</th>
+            <th>Data resolução</th>
+            <th>Prioridade</th>
+            <th>Status</th>
+            <th>Descricao</th>
+            <th>Comentários</th>
+            \n");
         print ("</tr>");
         while (mysqli_stmt_fetch($stmt)) {
             print ("<tr>\n");
-            printf("<td class='quadricula2'>%s</td><td class='quadricula2'>%s</td><td class='quadricula2'>%s</td><td class='quadricula2'>%s</td><td class='quadricula2'>%s</td><td class='quadricula2'>%s</td><td class='quadricula2'>%s</td>\n", $idproblema, $dataabertura, $dataresolucao, $prioridade, $status, $descricao, $comentarios);
+            printf("
+                <td >%s</td>
+                <td >%s</td>
+                <td >%s</td>
+                <td >%s</td>
+                <td >%s</td>
+                <td >%s</td>
+                <td >%s</td>
+                \n",
+                $idproblema, $dataabertura, $dataresolucao, $prioridade, $status, $descricao, $comentarios);
             print ("</tr>\n");
         }
         print ("</table>\n");

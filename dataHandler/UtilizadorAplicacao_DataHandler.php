@@ -15,12 +15,12 @@ class UtilizadorAplicacao_DataHandler {
             $_SESSION["msg"] = "Não consegui criar a ligação à BD! <br> " . mysqli_connect_errno() . "-" . mysqli_connect_error();
             //mensagem de erro para cliente
             //$_SESSION["msg"] = "Não consegui criar a ligação à BD! <br> ";
-            header("Location: login.php");
+            header("Location: Login.php");
             exit();
         }
         if (!mysqli_set_charset($this->connection, "utf8")) {
             $_SESSION["msg"] = '<div class="msgErro">Não consegui carregar character set utf8: ' . mysqli_error($this->connection);
-            header("Location: login.php");
+            header("Location: Login.php");
             exit();
         }
     }
@@ -78,35 +78,6 @@ class UtilizadorAplicacao_DataHandler {
 
         return $row; 
     }
-    
-    //------------------------------------------------------------------------------------
 
-    function validateLoginOld($login, $password) {
-        $query = "SELECT perfil FROM utilizador_aplicacao where login = '" . $login . "' AND pwd = password('" . $password . "') and estado='ATIVO'";
-        //Para testar SQL injetion alterar a classe LoginAction em 3 pontos:
-        //     Usar $loginUsername = $_GET["loginUsername"];
-        //     Usar $palavrachave = $_GET["palavrachave"];
-        //     Invocar esta função de validação de password
-        // Este query está sujeito a SQL Injetion no campo LOGIN:
-        //     Fazer login sem saber o nome do user e com um privilégio qualquer: "aa' or '1'='1' limit 1 -- " (é importante o espaço depois do inicio de comentário)
-        //     Fazer login sem saber o nome do user e com o privilégio de administrador: "aa' or '1'='1' and perfil='ADMINISTRADOR' limit 1 -- "(é importante o espaço depois do inicio de comentário)
-        // Este query está sujeito a SQL Injetion no campo PASSWORD:
-        //     Fazer login sem saber o nome do user e com um privilegio qualquer: "aa') or 1=1 limit 1 -- " (é importante o espaço em branco depois do inicio de comentário)
-        //     Fazer login sem saber o nome do user e com o privilegio ADMIN: "aa') or 1=1 and perfil='ADMINISTRADOR' limit 1 -- " ((é importante o espaço em branco depois do inicio de comentário)
-        //print $query;
-        //exit();
-        $result = mysqli_query($this->connection, $query);
-        $rowsFound = mysqli_num_rows($result);
-        // exactly one row? then we have found the user
-        if ($rowsFound == 1) {
-            $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-            $tipoUtilizador = $row["perfil"]; 
-        } else {
-            $tipoUtilizador = "";
-        }
-        mysqli_free_result($result);
-        mysqli_close($this->connection);
-        return $tipoUtilizador;
-    }
 }
 ?>

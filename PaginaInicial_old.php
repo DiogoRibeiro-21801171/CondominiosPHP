@@ -2,7 +2,7 @@
 session_start();
 if (!isset($_SESSION["tipoUtilizador"]) || strcmp($_SESSION["tipoUtilizador"], "") == 0) {
     $_SESSION["msg"] = "Utilizador não autenticado";
-    header('Location:login.php');
+    header('Location: Login.php');
     exit();
 }
 ?>

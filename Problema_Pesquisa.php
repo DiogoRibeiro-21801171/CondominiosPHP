@@ -38,6 +38,7 @@ $_SESSION["msg"] = "";
 ?>
 <h2>Pesquisa de problemas</h2>
 <form action="Problema_Pesquisa.php" method="GET">
+
     <table>
         <tr>
             <td>Status:</td>

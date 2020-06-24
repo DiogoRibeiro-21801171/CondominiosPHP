@@ -39,41 +39,31 @@ $_SESSION["msg"] = "";
 ?>
 <h2>Detalhes de pagamentos de quotas extra</h2>
 <form action="PagamentoQuotasExtra_Detalhe.php" method="GET">
-    <table>
-        <tr>
-            <td>Fração:</td>
-            <td>
-            	<?php
-            	$idfracao = filter_input(INPUT_GET, 'idfracao', FILTER_SANITIZE_SPECIAL_CHARS);
-            	//print "<p> {$idfracao} </p>";
-            	if (empty($idfracao)) {
-            	    print "<input type=\"text\" name=\"idfracao\" value=\"%\">";
-            	} else {
-            	    print "<input type=\"text\" name=\"idfracao\" value=\"{$idfracao}\">";
-            	}
-                ?>
-            </td>
-        </tr>
-        <tr>
-            <td>Ano:</td>
-            <td>
-            	<?php
-            	$ano = filter_input(INPUT_GET, 'ano', FILTER_SANITIZE_SPECIAL_CHARS);
-            	//print "<p> {$ano} </p>";
-            	if (empty($ano)) {
-            	    print "<input type=\"text\" name=\"ano\" value=\"" . date("Y") . "\">";
-            	} else {
-            	    print "<input type=\"text\" name=\"ano\" value=\"{$ano}\">";
-            	}
-                ?>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2">
-                <input type="submit" value="Pesquisar">
-            </td>
-        </tr>
-    </table>
+    <div class="form-group">
+        <label>Fração:</label>
+        <?php
+        $idfracao = filter_input(INPUT_GET, 'idfracao', FILTER_SANITIZE_SPECIAL_CHARS);
+        //print "<p> {$idfracao} </p>";
+        if (empty($idfracao)) {
+            print "<input type=\"text\" name=\"idfracao\" value=\"%\">";
+        } else {
+            print "<input type=\"text\" name=\"idfracao\" value=\"{$idfracao}\">";
+        }
+        ?>
+    </div>
+    <div class="form-group">
+        <label>Ano:</label>
+        <?php
+        $ano = filter_input(INPUT_GET, 'ano', FILTER_SANITIZE_SPECIAL_CHARS);
+        //print "<p> {$ano} </p>";
+        if (empty($ano)) {
+            print "<input type=\"text\" name=\"ano\" value=\"" . date("Y") . "\">";
+        } else {
+            print "<input type=\"text\" name=\"ano\" value=\"{$ano}\">";
+        }
+        ?>
+    </div>
+    <input type="submit" value="Pesquisar">
 </form>
 <hr>
 

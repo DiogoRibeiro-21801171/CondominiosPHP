@@ -50,110 +50,87 @@ require 'templates/inc_db.inc';
 ?>
 <h2>Pesquisa de despesa</h2>
 <form name="mainform" action="Despesa_Pesquisa.php" method="GET">
-    <table>
-        <tr>
-            <td>Fornecedor:</td>
-            <td>
-            	<?php
-            	$fornecedor = filter_input(INPUT_GET, 'fornecedor', FILTER_SANITIZE_SPECIAL_CHARS);
-            	//print "<p> {$fornecedor} </p>";
-            	if (empty($fornecedor)) {
-            	    print "<input type=\"text\" name=\"fornecedor\" value=\"%\">";
-            	} else {
-            	    print "<input type=\"text\" name=\"fornecedor\" value=\"{$fornecedor}\">";
-            	}
-            	?>
-            </td>
-        </tr>
-        <tr>
-            <td>Rubrica de orçamento:</td>
-            <td>
-            	<?php
-            	//$idrubricaorcamento = filter_input(INPUT_GET, 'idrubricaorcamento', FILTER_SANITIZE_SPECIAL_CHARS);
-            	////print "<p> {$idrubricaorcamento} </p>";
-            	//$despesadatahandler = new Despesa_DataHandler($dbHostName, $dbDatabaseName, $dbUsername, $dbPassword);
-            	//$despesadatahandler->buildListaRubricaOrcamento($idrubricaorcamento);
-                ?>
-                <?php
-                $pf1 = filter_input(INPUT_GET, 'pf1', FILTER_SANITIZE_SPECIAL_CHARS);
-                if (empty($pf1)) {
-                    $pf1="%";
-                    print("   <input name=\"pf1\" type=\"text\" value=\"%\" size=\"8\">");
-                } else {
-                    print("   <input name=\"pf1\" type=\"text\" value=\"{$pf1}\" size=\"8\">");
-                }
-                $pf2 = filter_input(INPUT_GET, 'pf2', FILTER_SANITIZE_SPECIAL_CHARS);
-                if (empty($pf2) or (strcmp($pf1,"%") == 0)) {
-                    print("   <input name=\"pf2\" type=\"text\" value=\"\" size=\"40\" disabled>");
-                } else {
-                    print("   <input name=\"pf2\" type=\"text\" value=\"{$pf2}\" size=\"40\" disabled>");
-                }
-                print("&nbsp;<input type=\"button\" value=\"ldv\" onclick=\"abrirJanelaFilho('Despesa_LOV_RubricaOrcamento.php','win2')\">");
-            	?>                
-            </td>
-        </tr>
-        <tr>
-            <td>Data da fatura:</td>
-            <td>
-            	<?php
-            	$datafatura = filter_input(INPUT_GET, 'datafatura', FILTER_SANITIZE_SPECIAL_CHARS);
-            	//print "<p> {$datafatura} </p>";
-            	if (empty($datafatura)) {
-            	    print "<input type=\"text\" name=\"datafatura\" value=\"" . date("Y") . "%\">";
-            	} else {
-            	    print "<input type=\"text\" name=\"datafatura\" value=\"{$datafatura}\">";
-            	}
-                ?>
-            </td>
-        </tr>
-        <tr>
-            <td>Data limite de pagamento:</td>
-            <td>
-            	<?php
-            	$datalimitepagamento = filter_input(INPUT_GET, 'datalimitepagamento', FILTER_SANITIZE_SPECIAL_CHARS);
-            	//print "<p> {$datalimitepagamento} </p>";
-            	if (empty($datalimitepagamento)) {
-            	    print "<input type=\"text\" name=\"datalimitepagamento\" value=\"%\">";
-            	} else {
-            	    print "<input type=\"text\" name=\"datalimitepagamento\" value=\"{$datalimitepagamento}\">";
-            	}
-                ?>
-            </td>
-        </tr>
-        <tr>
-            <td>Data de pagamento:</td>
-            <td>
-            	<?php
-            	$datapagamento = filter_input(INPUT_GET, 'datapagamento', FILTER_SANITIZE_SPECIAL_CHARS);
-            	//print "<p> {$datapagamento} </p>";
-            	if (empty($datapagamento)) {
-            	    print "<input type=\"text\" name=\"datapagamento\" value=\"%\">";
-            	} else {
-            	    print "<input type=\"text\" name=\"datapagamento\" value=\"{$datapagamento}\">";
-            	}
-                ?>
-            </td>
-        </tr>
-        <tr>
-            <td>Valor com IVA:</td>
-            <td>
-            	<?php
-            	$valorcomiva = filter_input(INPUT_GET, 'valorcomiva', FILTER_SANITIZE_SPECIAL_CHARS);
-            	//print "<p> {$valorcomiva} </p>";
-            	if (empty($valorcomiva)) {
-            	    print "<input type=\"text\" name=\"valorcomiva\" value=\"%\">";
-            	} else {
-            	    print "<input type=\"text\" name=\"valorcomiva\" value=\"{$valorcomiva}\">";
-            	}
-                ?>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2">
-                <input type="submit" value="Pesquisar">
-            </td>
-        </tr>
-    </table>
+    <div class="form-group">
+        <label>Fornecedor:</label>
+        <?php
+        $fornecedor = filter_input(INPUT_GET, 'fornecedor', FILTER_SANITIZE_SPECIAL_CHARS);
+        //print "<p> {$fornecedor} </p>";
+        if (empty($fornecedor)) {
+            print "<input type=\"text\" name=\"fornecedor\" value=\"%\">";
+        } else {
+            print "<input type=\"text\" name=\"fornecedor\" value=\"{$fornecedor}\">";
+        }
+        ?>
+    </div>
+    <div class="form-group">
+        <label>Rubrica Orçamento:</label>
+        <?php
+        $pf1 = filter_input(INPUT_GET, 'pf1', FILTER_SANITIZE_SPECIAL_CHARS);
+        if (empty($pf1)) {
+            $pf1="%";
+            print("   <input name=\"pf1\" type=\"text\" value=\"%\" size=\"8\">");
+        } else {
+            print("   <input name=\"pf1\" type=\"text\" value=\"{$pf1}\" size=\"8\">");
+        }
+        $pf2 = filter_input(INPUT_GET, 'pf2', FILTER_SANITIZE_SPECIAL_CHARS);
+        if (empty($pf2) or (strcmp($pf1,"%") == 0)) {
+            print("   <input name=\"pf2\" type=\"text\" value=\"\" size=\"40\" disabled>");
+        } else {
+            print("   <input name=\"pf2\" type=\"text\" value=\"{$pf2}\" size=\"40\" disabled>");
+        }
+        print("&nbsp;<input type=\"button\" value=\"Escolher\" onclick=\"abrirJanelaFilho('Despesa_LOV_RubricaOrcamento.php','win2')\">");
+        ?>
+    </div>
+    <div class="form-group">
+        <label>Data da Fatura:</label>
+        <?php
+        $datafatura = filter_input(INPUT_GET, 'datafatura', FILTER_SANITIZE_SPECIAL_CHARS);
+        //print "<p> {$datafatura} </p>";
+        if (empty($datafatura)) {
+            print "<input type=\"text\" name=\"datafatura\" value=\"" . date("Y") . "%\">";
+        } else {
+            print "<input type=\"text\" name=\"datafatura\" value=\"{$datafatura}\">";
+        }
+        ?>
+    </div>
+    <div class="form-group">
+        <label>Data Limite Pagamento:</label>
+        <?php
+        $datalimitepagamento = filter_input(INPUT_GET, 'datalimitepagamento', FILTER_SANITIZE_SPECIAL_CHARS);
+        //print "<p> {$datalimitepagamento} </p>";
+        if (empty($datalimitepagamento)) {
+            print "<input type=\"text\" name=\"datalimitepagamento\" value=\"%\">";
+        } else {
+            print "<input type=\"text\" name=\"datalimitepagamento\" value=\"{$datalimitepagamento}\">";
+        }
+        ?>
+    </div>
+    <div class="form-group">
+        <label>Data de Pagamento:</label>
+        <?php
+        $datapagamento = filter_input(INPUT_GET, 'datapagamento', FILTER_SANITIZE_SPECIAL_CHARS);
+        //print "<p> {$datapagamento} </p>";
+        if (empty($datapagamento)) {
+            print "<input type=\"text\" name=\"datapagamento\" value=\"%\">";
+        } else {
+            print "<input type=\"text\" name=\"datapagamento\" value=\"{$datapagamento}\">";
+        }
+        ?>
+    </div>
+    <div class="form-group">
+        <label>Valor com IVA:</label>
+        <?php
+        $valorcomiva = filter_input(INPUT_GET, 'valorcomiva', FILTER_SANITIZE_SPECIAL_CHARS);
+        //print "<p> {$valorcomiva} </p>";
+        if (empty($valorcomiva)) {
+            print "<input type=\"text\" name=\"valorcomiva\" value=\"%\">";
+        } else {
+            print "<input type=\"text\" name=\"valorcomiva\" value=\"{$valorcomiva}\">";
+        }
+        ?>
+    </div>
+
+    <input type="submit" value="Pesquisar">
 </form>
 
 <hr>
@@ -166,7 +143,6 @@ if (!empty($fornecedor) or !empty($datafatura) or !empty($datalimitepagamento) o
     $despesadatahandler->pesquisaDespesa($idcondominio, $fornecedor, $pf1, $valorcomiva, $datafatura, $datalimitepagamento, $datapagamento);
 }
 ?>
-
 <!-- .................................................................................................................................. -->	
 <?php require 'templates/inc_head04.inc'; ?>
 </body>

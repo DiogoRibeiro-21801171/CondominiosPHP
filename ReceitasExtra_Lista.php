@@ -37,27 +37,19 @@ $_SESSION["msg"] = "";
 ?>
 
 <form action="ReceitasExtra_Lista.php" method="GET">
-    <table>
-        <tr>
-            <td>Ano:</td>
-            <td>
-            	<?php
-            	$ano = filter_input(INPUT_GET, 'ano', FILTER_SANITIZE_SPECIAL_CHARS);
-            	//print "<p> {$ano} </p>";
-            	if (empty($ano)) {
-            	    print "<input type=\"text\" name=\"ano\" value=\"" . date("Y") . "\">";
-            	} else {
-            	    print "<input type=\"text\" name=\"ano\" value=\"{$ano}\">";
-            	}
-                ?>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2">
-                <input type="submit" value="Pesquisar">
-            </td>
-        </tr>
-    </table>
+    <div class="form-group">
+        <label>Ano:</label>
+        <?php
+        $ano = filter_input(INPUT_GET, 'ano', FILTER_SANITIZE_SPECIAL_CHARS);
+        //print "<p> {$ano} </p>";
+        if (empty($ano)) {
+            print "<input type=\"text\" name=\"ano\" value=\"" . date("Y") . "\">";
+        } else {
+            print "<input type=\"text\" name=\"ano\" value=\"{$ano}\">";
+        }
+        ?>
+    </div>
+    <input type="submit" value="Pesquisar">
 </form>
 <hr>
 <?php

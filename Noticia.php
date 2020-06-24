@@ -2,7 +2,7 @@
 session_start();
 if (!isset($_SESSION["tipoUtilizador"]) || strcmp($_SESSION["tipoUtilizador"], "") == 0) {
     $_SESSION["msg"] = "Utilizador não autenticado";
-    header('Location:Login.php');
+    header('Location: Login.php');
     exit();
 }
 ?>
@@ -30,7 +30,7 @@ var currentLeaf = 'Noticias';
 <?php
 if ((isset($_SESSION["idcondominio"]) == 0)) {
     $_SESSION["msg"] = "idcondominio não está definido!";
-    header('Location:Login.php');
+    header('Location: Login.php');
     exit();
 } else {
     $idcondominio = $_SESSION["idcondominio"];

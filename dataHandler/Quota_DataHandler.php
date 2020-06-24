@@ -17,7 +17,7 @@ class Quota_DataHandler {
             $_SESSION["msg"] = "Não consegui criar a ligação à BD! <br> " . mysqli_connect_errno() . "-" . mysqli_connect_error();
             //mensagem de erro para cliente
             //$_SESSION["msg"] = "Não consegui criar a ligação à BD! <br> ";
-            header("Location: login.php");
+            header("Location: Login.php");
             exit();
         }
         
@@ -26,7 +26,7 @@ class Quota_DataHandler {
             $_SESSION["msg"] = '<div class="msgErro">Não consegui carregar character set utf8: ' . mysqli_error($this->connection);
             //mensagem de erro para cliente
             //$_SESSION["msg"] = '<div class="msgErro">Não consegui carregar character set utf8: ';
-            header("Location: login.php");
+            header("Location: Login.php");
             exit();
         }
     }

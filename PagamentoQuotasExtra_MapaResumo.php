@@ -37,47 +37,37 @@ $_SESSION["msg"] = "";
 ?>
 
 <form action="PagamentoQuotasExtra_MapaResumo.php" method="GET">
-    <table>
-        <tr>
-            <td>Tipo de quota:</td>
-            <td>
-            	<select name="tipoquota">
-    				<?php
-    				$primeiraVez = false;
-    				$tipoquota = filter_input(INPUT_GET, 'tipoquota', FILTER_SANITIZE_SPECIAL_CHARS);
-    				if (empty($tipoquota)) {
-    				    $tipoquota = "Elevadores";
-    				    $primeiraVez = true;
-    				}
-                	if ((strcmp($tipoquota, "Elevadores") == 0)) {
-                	    print '<option value="Elevadores" selected="selected">Elevadores</option>';
-                	} else {
-                	    print '<option value="Elevadores">Elevadores</option>';;
-                	}
-                	?>
-            	</select>
-            </td>
-        </tr>
-        <tr>
-            <td>Ano:</td>
-            <td>
-            	<?php
-            	$ano = filter_input(INPUT_GET, 'ano', FILTER_SANITIZE_SPECIAL_CHARS);
-            	//print "<p> {$ano} </p>";
-            	if (empty($ano)) {
-            	    print "<input type=\"text\" name=\"ano\" value=\"" . date("Y") . "\">";
-            	} else {
-            	    print "<input type=\"text\" name=\"ano\" value=\"{$ano}\">";
-            	}
-                ?>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2">
-                <input type="submit" value="Pesquisar">
-            </td>
-        </tr>
-    </table>
+    <div class="form-group">
+        <label>Tipo de quota:</label>
+        <select name="tipoquota">
+            <?php
+            $primeiraVez = false;
+            $tipoquota = filter_input(INPUT_GET, 'tipoquota', FILTER_SANITIZE_SPECIAL_CHARS);
+            if (empty($tipoquota)) {
+                $tipoquota = "Elevadores";
+                $primeiraVez = true;
+            }
+            if ((strcmp($tipoquota, "Elevadores") == 0)) {
+                print '<option value="Elevadores" selected="selected">Elevadores</option>';
+            } else {
+                print '<option value="Elevadores">Elevadores</option>';;
+            }
+            ?>
+        </select>
+    </div>
+    <div class="form-group">
+        <label>Ano:</label>
+        <?php
+        $ano = filter_input(INPUT_GET, 'ano', FILTER_SANITIZE_SPECIAL_CHARS);
+        //print "<p> {$ano} </p>";
+        if (empty($ano)) {
+            print "<input type=\"text\" name=\"ano\" value=\"" . date("Y") . "\">";
+        } else {
+            print "<input type=\"text\" name=\"ano\" value=\"{$ano}\">";
+        }
+        ?>
+    </div>
+    <input type="submit" value="Pesquisar">
 </form>
 <hr>
 <?php

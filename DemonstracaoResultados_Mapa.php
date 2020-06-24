@@ -2,7 +2,7 @@
 session_start();
 if (!isset($_SESSION["tipoUtilizador"]) || strcmp($_SESSION["tipoUtilizador"], "") == 0) {
     $_SESSION["msg"] = "Utilizador não autenticado";
-    header('Location:Login.php');
+    header('Location: Login.php');
     exit();
 }
 ?>
@@ -29,7 +29,7 @@ if ((isset($_SESSION["msg"])) && !(strcmp($_SESSION["msg"], "") == 0)) {
 }
 if ((isset($_SESSION["idcondominio"]) == 0)) {
     $_SESSION["msg"] = "idcondominio não está definido!";
-    header('Location:Login.php');
+    header('Location: Login.php');
     exit();
 } else {
     $idcondominio = $_SESSION["idcondominio"];
@@ -39,27 +39,19 @@ $_SESSION["msg"] = "";
 ?>
 <h2>Demonstracao de resultados</h2>
 <form action="DemonstracaoResultados_Mapa.php" method="GET">
-    <table>
-        <tr>
-            <td>Ano:</td>
-            <td>
-            	<?php
-            	$ano = filter_input(INPUT_GET, 'ano', FILTER_SANITIZE_SPECIAL_CHARS);
-            	//print "<p> {$ano} </p>";
-            	if (empty($ano)) {
-            	    print "<input type=\"text\" name=\"ano\" value=\"" . date("Y") . "\">";
-            	} else {
-            	    print "<input type=\"text\" name=\"ano\" value=\"{$ano}\">";
-            	}
-                ?>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2">
-                <input type="submit" value="Pesquisar">
-            </td>
-        </tr>
-    </table>
+    <div class="form-group">
+        <label>Ano:</label>
+        <?php
+        $ano = filter_input(INPUT_GET, 'ano', FILTER_SANITIZE_SPECIAL_CHARS);
+        //print "<p> {$ano} </p>";
+        if (empty($ano)) {
+            print "<input type=\"text\" name=\"ano\" value=\"" . date("Y") . "\">";
+        } else {
+            print "<input type=\"text\" name=\"ano\" value=\"{$ano}\">";
+        }
+        ?>
+    </div>
+    <input type="submit" value="Pesquisar">
 </form>
 
 <hr>

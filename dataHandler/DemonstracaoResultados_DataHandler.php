@@ -17,7 +17,7 @@ class DemonstracaoResultados_DataHandler {
             $_SESSION["msg"] = "Não consegui criar a ligação à  BD! <br> " . mysqli_connect_errno() . "-" . mysqli_connect_error();
             //mensagem de erro para cliente
             //$_SESSION["msg"] = "Não consegui criar a ligação à  BD! <br> ";
-            header("Location: login.php");
+            header("Location: Login.php");
             exit();
         }
         
@@ -26,7 +26,7 @@ class DemonstracaoResultados_DataHandler {
             $_SESSION["msg"] = '<div class="msgErro">Não consegui carregar character set utf8: ' . mysqli_error($this->connection);
             //mensagem de erro para cliente
             //$_SESSION["msg"] = '<div class="msgErro">Não consegui carregar character set utf8: ';
-            header("Location: login.php");
+            header("Location: Login.php");
             exit();
         }
     }
@@ -96,9 +96,14 @@ class DemonstracaoResultados_DataHandler {
         /* transportar os valores */
         /* nas expressàµes abaixo à© mais rà¡pido fazer print ('<table>\n'); mas neste caso o PHP não vai interpretar \n como fim de linha */
         /* quando colocamos print("<table>\n"); o PHP faz uma anà¡lise ao argumento e deteta o fim de linha */
-        print ("<table class='tabela2'>\n");
+        print ("<table class='table table-bordered table-striped'>\n");
         print ("<tr>");
-        print ("<th class='quadricula2'>Rubrica de orçamento</th><th class='quadricula2'>Valor orçamentado</th><th class='quadricula2'>Faturas emitidas</th><th class='quadricula2'>Faturas pagas</th>\n");
+        print ("
+            <th>Rubrica de orçamento</th>
+            <th>Valor orçamentado</th>
+            <th>Faturas emitidas</th>
+            <th>Faturas pagas</th>
+            \n");
         print ("</tr>");
         while (mysqli_stmt_fetch($stmt)) {
             $orcamentadoS = number_format($orcamentado,2,'.',' '); 
@@ -109,7 +114,13 @@ class DemonstracaoResultados_DataHandler {
             for ($i = 1; $i <= intval($nivel); $i++) {
                 $espaco = $espaco . "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
             } 
-            printf("<td class='quadricula2'>%s</td><td class='quadricula1'>%s</td><td class='quadricula1'>%s</td><td class='quadricula1'>%s</td>\n", ($espaco . $nome), $orcamentadoS, $faturas_emitidasS, $faturas_pagasS);
+            printf("
+                <td>%s</td>
+                <td>%s</td>
+                <td>%s</td>
+                <td>%s</td>
+                \n",
+                ($espaco . $nome), $orcamentadoS, $faturas_emitidasS, $faturas_pagasS);
             print ("</tr>\n");
         }
         print ("</table>\n");
@@ -187,9 +198,14 @@ class DemonstracaoResultados_DataHandler {
         /* transportar os valores */
         /* nas expressàµes abaixo à© mais rà¡pido fazer print ('<table>\n'); mas neste caso o PHP não vai interpretar \n como fim de linha */
         /* quando colocamos print("<table>\n"); o PHP faz uma anà¡lise ao argumento e deteta o fim de linha */
-        print ("<table class='tabela2'>\n");
+        print ("<table class='table table-bordered table-striped'>\n");
         print ("<tr>");
-        print ("<th class='quadricula2'>Rubrica de orçamento</th><th class='quadricula2'>Valor orçamentado</th><th class='quadricula2'>Valor recebido</th><th class='quadricula2'>Diferença</th>\n");
+        print ("
+            <th>Rubrica de orçamento</th>
+            <th >Valor orçamentado</th>
+            <th >Valor recebido</th>
+            <th >Diferença</th>
+            \n");
         print ("</tr>");
         while (mysqli_stmt_fetch($stmt)) {
             $orcamentadoS    = number_format($orcamentado,2,'.',' ');
@@ -205,7 +221,13 @@ class DemonstracaoResultados_DataHandler {
             for ($i = 1; $i <= intval($nivel); $i++) {
                 $espaco = $espaco . "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
             }
-            printf("<td class='quadricula2'>%s</td><td class='quadricula1'>%s</td><td class='quadricula1'>%s</td><td class='quadricula1'>%s</td>\n", ($espaco . $nome), $orcamentadoS, $valor_recebidoS, $diferencaS);
+            printf("
+                <td >%s</td>
+                <td >%s</td>
+                <td >%s</td>
+                <td >%s</td>
+                \n",
+                ($espaco . $nome), $orcamentadoS, $valor_recebidoS, $diferencaS);
             print ("</tr>\n");
         }
         print ("</table>\n");
@@ -246,10 +268,10 @@ class DemonstracaoResultados_DataHandler {
             if ($countLinhas!=0) {
                 $linha = $linha . "<tr>";
             }
-            $linha = $linha . "<td class='quadricula2'>$descricaoconta</td><td class='quadricula2'>$dataextracao</td><td class='quadricula1'>$saldoS</td></tr>";
+            $linha = $linha . "<td >$descricaoconta</td><td >$dataextracao</td><td >$saldoS</td></tr>";
             $countLinhas = $countLinhas + 1;
         }
-        print "<tr><td rowspan='$countLinhas' class='quadricula2'>Saldo das contas bancárias</td>";
+        print "<tr><td rowspan='$countLinhas' >Saldo das contas bancárias</td>";
         print $linha;
     }
     
@@ -445,104 +467,104 @@ class DemonstracaoResultados_DataHandler {
         $totalDespesasAnoAnteriorPagasNoAno = number_format($totalDespesasAnoAnteriorPagasNoAno,2,'.',' ');
         
         //------------------------------------------
-        print ("<table class='tabela2'>\n");
+        print ("<table class='table table-bordered table-striped'>\n");
         print ("<tr>");
-        print ("<th rowspan=\"6\" class='quadricula2'>Total de receitas</th>");
-        print ("<td class='quadricula2'>Quotas do ano pagas no ano</td>");
-        print ("<td class='quadricula2'>A1</td>");
-        print ("<td class='quadricula1'>{$quotasDoAnoPagasNoAno}</td>");
+        print ("<th rowspan=\"6\" >Total de receitas</th>");
+        print ("<td >Quotas do ano pagas no ano</td>");
+        print ("<td >A1</td>");
+        print ("<td >{$quotasDoAnoPagasNoAno}</td>");
         print ("</tr>");
         print ("<tr>");
-        print ("<td class='quadricula2'>Quotas atrasadas pagas no ano</td>");
-        print ("<td class='quadricula2'>A2</td>");
-        print ("<td class='quadricula1'>{$quotasAtrasadasPagasNoAno}</td>");
+        print ("<td >Quotas atrasadas pagas no ano</td>");
+        print ("<td >A2</td>");
+        print ("<td >{$quotasAtrasadasPagasNoAno}</td>");
         print ("</tr>");
         print ("<tr>");
-        print ("<td class='quadricula2'>Quotas extra do ano pagas no ano</td>");
-        print ("<td class='quadricula2'>B1</td>");
-        print ("<td class='quadricula1'>{$quotasExtraDoAnoPagasNoAno}</td>");
+        print ("<td >Quotas extra do ano pagas no ano</td>");
+        print ("<td >B1</td>");
+        print ("<td >{$quotasExtraDoAnoPagasNoAno}</td>");
         print ("</tr>");
         print ("<tr>");
-        print ("<td class='quadricula2'>Quotas extra atrasadas pagas no ano</td>");
-        print ("<td class='quadricula2'>B2</td>");
-        print ("<td class='quadricula1'>{$quotasExtraAtasadasPagasNoAno}</td>");
+        print ("<td >Quotas extra atrasadas pagas no ano</td>");
+        print ("<td >B2</td>");
+        print ("<td >{$quotasExtraAtasadasPagasNoAno}</td>");
         print ("</tr>");
         print ("<tr>");
-        print ("<td class='quadricula2'>Quotas extra do próximo ano pagas no ano</td>");
-        print ("<td class='quadricula2'>B3</td>");
-        print ("<td class='quadricula1'>{$quotasExtraDoProximoAnoPagasNoAno}</td>");
+        print ("<td >Quotas extra do próximo ano pagas no ano</td>");
+        print ("<td >B3</td>");
+        print ("<td >{$quotasExtraDoProximoAnoPagasNoAno}</td>");
         print ("</tr>");
         print ("<tr>");
-        print ("<td class='quadricula2'>Extraordinárias</td>");
-        print ("<td class='quadricula2'>C</td>");
-        print ("<td class='quadricula1'>{$totalReceitasExtra}</td>");
+        print ("<td >Extraordinárias</td>");
+        print ("<td >C</td>");
+        print ("<td >{$totalReceitasExtra}</td>");
         print ("</tr>");
         print ("<tr>");
-        print ("<th rowspan=\"4\" class='quadricula2'>Quotas não pagas</th>");
-        print ("<td class='quadricula2'>Quotas do ano não pagas</td>");
-        print ("<td class='quadricula2'>A4</td>");
-        print ("<td class='quadricula1'>{$quotasDoAnoNaoPagas}</td>");
+        print ("<th rowspan=\"4\" >Quotas não pagas</th>");
+        print ("<td >Quotas do ano não pagas</td>");
+        print ("<td >A4</td>");
+        print ("<td >{$quotasDoAnoNaoPagas}</td>");
         print ("</tr>");
         print ("<tr>");
-        print ("<td class='quadricula2'>Quotas extra do ano não pagas</td>");
-        print ("<td class='quadricula2'>B4</td>");
-        print ("<td class='quadricula1'>{$quotasExtraDoAnoNaoPagas}</td>");
+        print ("<td >Quotas extra do ano não pagas</td>");
+        print ("<td >B4</td>");
+        print ("<td >{$quotasExtraDoAnoNaoPagas}</td>");
         print ("</tr>");
         print ("<tr>");
-        print ("<td class='quadricula2'>Quotas normais - enganos nos pagamentos</td>");
-        print ("<td class='quadricula2'>A5</td>");
-        print ("<td class='quadricula1'>{$quotasNormaisDoAnoEnganos}</td>");
+        print ("<td >Quotas normais - enganos nos pagamentos</td>");
+        print ("<td >A5</td>");
+        print ("<td >{$quotasNormaisDoAnoEnganos}</td>");
         print ("</tr>");
         print ("<tr>");
-        print ("<td class='quadricula2'>Quotas extra do ano - enganos nos pagamentos</td>");
-        print ("<td class='quadricula2'>B5</td>");
-        print ("<td class='quadricula1'>{$quotasExtraDoAnoEnganos}</td>");
+        print ("<td >Quotas extra do ano - enganos nos pagamentos</td>");
+        print ("<td >B5</td>");
+        print ("<td >{$quotasExtraDoAnoEnganos}</td>");
         print ("</tr>");
         print ("<tr>");
-        print ("<th rowspan=\"4\" class='quadricula2'>Total de despesas</th>");
-        print ("<td class='quadricula2'>Orçamentadas</td>");
-        print ("<td class='quadricula2'>H</td>");
-        print ("<td class='quadricula1'>{$orcamento}</td>");
+        print ("<th rowspan=\"4\" >Total de despesas</th>");
+        print ("<td >Orçamentadas</td>");
+        print ("<td >H</td>");
+        print ("<td >{$orcamento}</td>");
         print ("</tr>");
         print ("<tr>");
-        print ("<td class='quadricula2'>Despessas assumidas no ano (pago + não pago)</td>");
-        print ("<td class='quadricula2'>I</td>");
-        print ("<td class='quadricula1'>{$totalFaturado}</td>");
+        print ("<td >Despessas assumidas no ano (pago + não pago)</td>");
+        print ("<td >I</td>");
+        print ("<td >{$totalFaturado}</td>");
         print ("</tr>");
         print ("<tr>");
-        print ("<td class='quadricula2'>Despessas assumidas no ano e pagas no ano</td>");
-        print ("<td class='quadricula2'>J</td>");
-        print ("<td class='quadricula1'>{$totalDespesasFaturadasPagas}</td>");
+        print ("<td >Despessas assumidas no ano e pagas no ano</td>");
+        print ("<td >J</td>");
+        print ("<td >{$totalDespesasFaturadasPagas}</td>");
         print ("</tr>");
         print ("<tr>");
-        print ("<td class='quadricula2'>Despessas assumidas em anos anteriores e pagas no ano</td>");
-        print ("<td class='quadricula2'>K</td>");
-        print ("<td class='quadricula1'>{$totalDespesasAnoAnteriorPagasNoAno}</td>");
+        print ("<td >Despessas assumidas em anos anteriores e pagas no ano</td>");
+        print ("<td >K</td>");
+        print ("<td >{$totalDespesasAnoAnteriorPagasNoAno}</td>");
         print ("</tr>");
         print ("<tr>");
-        print ("<th rowspan=\"3\" class='quadricula2'>Resultado</th>");
-        print ("<td class='quadricula2'>Orçamentado vs despessas assumidas no ano (pago + não pago)</td>");
-        print ("<td class='quadricula2'>H - I</td>");
-        print ("<td class='quadricula1'>{$resultadoA}</td>");
+        print ("<th rowspan=\"3\" >Resultado</th>");
+        print ("<td >Orçamentado vs despessas assumidas no ano (pago + não pago)</td>");
+        print ("<td >H - I</td>");
+        print ("<td >{$resultadoA}</td>");
         print ("</tr>");
         print ("<tr>");
-        print ("<td class='quadricula2'>Orçamentado vs despesas pagas no ano</td>");
-        print ("<td class='quadricula2'>H - (J + K)</td>");
-        print ("<td class='quadricula1'>{$resultadoB}</td>");
+        print ("<td >Orçamentado vs despesas pagas no ano</td>");
+        print ("<td >H - (J + K)</td>");
+        print ("<td >{$resultadoB}</td>");
         print ("</tr>");
         print ("<tr>");
-        print ("<th class='quadricula2'>Receitas recebidas vs despesas efectuadas</th>");
-        print ("<td class='quadricula2'>(A1 + A2 + B1 + B2 + B3 + C) - (J + K)</td>");
-        print ("<td class='quadricula1'>{$resultadoC}</td>");
+        print ("<th >Receitas recebidas vs despesas efectuadas</th>");
+        print ("<td >(A1 + A2 + B1 + B2 + B3 + C) - (J + K)</td>");
+        print ("<td >{$resultadoC}</td>");
         print ("</tr>");
         //print ("<tr>");
-        //print ("<th class='quadricula2'>Receitas do próximo ano recebidas este ano</th>");
-        //print ("<td class='quadricula2'>D</td>");
-        //print ("<td class='quadricula1'>{$quotasExtraDoProximoAnoPagasNoAno}</td>");
+        //print ("<th >Receitas do próximo ano recebidas este ano</th>");
+        //print ("<td >D</td>");
+        //print ("<td >{$quotasExtraDoProximoAnoPagasNoAno}</td>");
         //print ("</tr>");
         print ("<tr>");
-        print ("<td class='quadricula2'>Dividas de anos anteriores</td>");
-        print ("<td colspan='3' class='quadricula1'>{$dividasAnosAnteriores}</td>");
+        print ("<td >Dividas de anos anteriores</td>");
+        print ("<td colspan='3' >{$dividasAnosAnteriores}</td>");
         print ("</tr>");
         $this->saldoContasBancarias($idcondominio, $ano);
         print ("</table>");

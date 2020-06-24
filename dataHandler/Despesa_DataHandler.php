@@ -17,7 +17,7 @@ class Despesa_DataHandler {
             $_SESSION["msg"] = "Não consegui criar a ligação à BD! <br> " . mysqli_connect_errno() . "-" . mysqli_connect_error();
             //mensagem de erro para cliente
             //$_SESSION["msg"] = "Não consegui criar a ligação à BD! <br> ";
-            header("Location: login.php");
+            header("Location: Login.php");
             exit();
         }
         
@@ -26,7 +26,7 @@ class Despesa_DataHandler {
             $_SESSION["msg"] = '<div class="msgErro">Não consegui carregar character set utf8: ' . mysqli_error($this->connection);
             //mensagem de erro para cliente
             //$_SESSION["msg"] = '<div class="msgErro">Não consegui carregar character set utf8: ';
-            header("Location: login.php");
+            header("Location: Login.php");
             exit();
         }
     }
@@ -222,15 +222,36 @@ class Despesa_DataHandler {
         /* transportar os valores */
         /* nas expressões abaixo é mais rápido fazer print ('<table>\n'); mas neste caso o PHP não vai interpretar \n como fim de linha */
         /* quando colocamos print("<table>\n"); o PHP faz uma análise ao argumento e deteta o fim de linha */
-        print ("<table class='tabela2'>\n");
+        print ("<table class='table table-bordered table-striped'>\n");
         print ("<tr>");
-        print ("<th class='quadricula2'>Data fatura</th><th class='quadricula2'>Data limite pagamento</th><th class='quadricula2'>Data pagamento</th><th class='quadricula2'>Fornecedor</th><th class='quadricula2'>Rubrica orçamento</th><th class='quadricula2'>Fatura</th><th class='quadricula2'>Valor com IVA</th><th class='quadricula2'>Forma pagamento</th><th class='quadricula2'>Comentário</th>\n");
+        print ("
+            <th>Data fatura</th>
+            <th>Data limite pagamento</th>
+            <th>Data pagamento</th>
+            <th>Fornecedor</th>
+            <th>Rubrica orçamento</th>
+            <th>Fatura</th>
+            <th>Valor com IVA</th>
+            <th>Forma pagamento</th>
+            <th>Comentário</th>
+            \n");
         print ("</tr>");
         while (mysqli_stmt_fetch($stmt)) {
             $valorcomivaS = number_format($valorcomiva,2,'.',' ');
             print ("<tr>\n");
-            printf("<td class='quadricula2'>%s</td><td class='quadricula2'>%s</td><td class='quadricula2'>%s</td><td class='quadricula2'>%s</td><td class='quadricula2'>%s</td><td class='quadricula2'>%s</td><td class='quadricula1'>%s</td><td class='quadricula2'>%s</td><td class='quadricula2'>%s</td>\n", 
-                $datafatura, $datalimitepagamento, $datapagamento, $fornecedor, $rubricaorcamento, $fatura, $valorcomivaS, $idformapagamento, $comentario);
+            printf("
+                <td>%s</td>
+                <td>%s</td>
+                <td>%s</td>
+                <td>%s</td>
+                <td>%s</td>
+                <td>%s</td>
+                <td>%s</td>
+                <td>%s</td>
+                <td>%s</td>
+                \n",
+                $datafatura, $datalimitepagamento, $datapagamento, $fornecedor,
+                $rubricaorcamento, $fatura, $valorcomivaS, $idformapagamento, $comentario);
             print ("</tr>\n");
         }
         print ("</table>\n");

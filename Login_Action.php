@@ -64,7 +64,7 @@ if (empty($loginUsername)) {
             } else {
                 $_SESSION["tipoUtilizador"] = "";
                 $_SESSION["msg"] = $tipoUtilizador;
-                header('Location:Login.php');
+                header('Location: Login.php');
                 exit();
             }
         }
