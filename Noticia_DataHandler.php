@@ -2,7 +2,6 @@
 class Noticia_DataHandler {
 
     private $connection;
-    
     //------------------------------------------------------------------------------------
     
     function __construct($hostName, $databaseName, $username, $password) {
@@ -35,7 +34,7 @@ class Noticia_DataHandler {
     
     function listaNoticias($idcondominio) {
 
-        $query = "select data, noticia from noticia where idcondominio = ? order by data desc";
+        $query = "select data, noticia, idnoticia from noticia where idcondominio = ? order by data desc";
 
         $stmt = mysqli_stmt_init($this->connection);
 
@@ -52,23 +51,23 @@ class Noticia_DataHandler {
             //print '<div class="msgErro">Erro na execução do SQL: ' . '</div>';
             return;
         }
-        mysqli_stmt_bind_result($stmt, $data, $noticia);
+        mysqli_stmt_bind_result($stmt, $data, $noticia, $idnoticia);
         /* transportar os valores */
         /* nas expressões abaixo é mais rápido fazer print ('<table>\n'); mas neste caso o PHP não vai interpretar \n como fim de linha */
         /* quando colocamos print("<table>\n"); o PHP faz uma análise ao argumento e deteta o fim de linha */
-        print ("<table class='tabela2'>\n");
+        print ("<table class='table table-bordered table-striped'>\n");
         print ("<tr>");
         print ("
-        <th class='quadricula2'>
+        <th >
         <!-- DATA -->
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Data&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         </th>
-        <th class='quadricula2'>
+        <th >
         <!-- NOTICIA -->
             Noticia
         </th>
         </th>
-        <th class='quadricula2'>
+        <th >
         <!-- ACAO -->
             AÇÃO
         </th>
@@ -77,7 +76,15 @@ class Noticia_DataHandler {
         // Conteudo, data, noticia
         while (mysqli_stmt_fetch($stmt)) {
             print ("<tr>\n");
-            printf("<td class='quadricula2'>%s</td><td class='quadricula2'>%s</td>\n", $data, $noticia);
+            printf("
+                <td >%s</td>
+                <td >%s</td>
+                <td >
+                <!-- 'delete.php?id=\\" . $idnoticia . "'-->
+                <a href='#' title='Editar Noticia' data-toggle='tooltip'><span class='glyphicon glyphicon-pencil'></span></a>
+                <a href='#' title='Eliminar Noticia' data-toggle='tooltip'><span class='glyphicon glyphicon-trash'></span></a>
+                </td>' \n",
+                $data, $noticia);
             print ("</tr>\n");
         }
         print ("</table>\n");

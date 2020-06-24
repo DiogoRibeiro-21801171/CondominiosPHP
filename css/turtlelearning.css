@@ -143,6 +143,11 @@ a{
 a:hover{
 	text-decoration: underline;
 }
+
+table tr td:last-child a{
+    margin-right: 15px;
+}
+
 .treeHighLight {
 	
 	color: #ff8000;
