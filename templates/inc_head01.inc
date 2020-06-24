@@ -35,8 +35,4 @@ function showHide(me) {
 	}
 }
 
-function funcao($idnoticia) {
-
-}
-
 </script>
