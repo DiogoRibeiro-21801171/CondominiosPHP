@@ -58,8 +58,23 @@ class Noticia_DataHandler {
         /* quando colocamos print("<table>\n"); o PHP faz uma análise ao argumento e deteta o fim de linha */
         print ("<table class='tabela2'>\n");
         print ("<tr>");
-        print ("<th class='quadricula2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Data&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th><th class='quadricula2'>Noticia</th>\n");
+        print ("
+        <th class='quadricula2'>
+        <!-- DATA -->
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Data&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </th>
+        <th class='quadricula2'>
+        <!-- NOTICIA -->
+            Noticia
+        </th>
+        </th>
+        <th class='quadricula2'>
+        <!-- ACAO -->
+            AÇÃO
+        </th>
+        \n");
         print ("</tr>");
+        // Conteudo, data, noticia
         while (mysqli_stmt_fetch($stmt)) {
             print ("<tr>\n");
             printf("<td class='quadricula2'>%s</td><td class='quadricula2'>%s</td>\n", $data, $noticia);
