@@ -10,17 +10,17 @@ if (!isset($_SESSION["tipoUtilizador"]) || strcmp($_SESSION["tipoUtilizador"], "
 <html lang="pt">
 <head>
 <title>Noticias</title>
-<?php require 'templates/inc_head01.inc'; ?>
+<?php require 'templates/app/inc_head01.inc'; ?>
 </head>
 <body onload="cleanOnLoad()">
-<?php require 'templates/inc_head02.inc'; ?>
+<?php require 'templates/app/inc_head02.inc'; ?>
 <!-- place the tree building script where you'd like in the body -->
 <script>
 /*Choose current leaf - must be done before create tree*/
 var currentLeaf = 'Noticias';
-<?php require 'templates/inc_tree.inc'; ?>
+<?php require 'templates/gestor/inc_tree_gestor.inc'; ?>
 </script>
-<?php require 'templates/inc_head03.inc'; ?>
+<?php require 'templates/app/inc_head03.inc'; ?>
 <!-- .................................................................................................................................. -->
 <div class="clearfix">
     <h2>Noticias</h2>
@@ -39,7 +39,7 @@ if ((isset($_SESSION["idcondominio"]) == 0)) {
 $_SESSION["msg"] = "";
 
 require 'dataHandler/Noticia_DataHandler.php';
-require 'templates/inc_db.inc';
+require 'templates/app/inc_db.inc';
 $noticiadatahandler = new Noticia_DataHandler($dbHostName, $dbDatabaseName, $dbUsername, $dbPassword);
 $noticiadatahandler->listaNoticias($idcondominio);
 
@@ -68,6 +68,6 @@ print ("
 
 ?>
 <!-- .................................................................................................................................. -->	
-<?php require 'templates/inc_head04.inc'; ?>
+<?php require 'templates/app/inc_head04.inc'; ?>
 </body>
 </html>

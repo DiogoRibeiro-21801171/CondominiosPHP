@@ -10,10 +10,10 @@ if (!isset($_SESSION["tipoUtilizador"]) || strcmp($_SESSION["tipoUtilizador"], "
 <html lang="pt">
 <head>
 <title>Pesquisa de despesas</title>
-<?php require 'templates/inc_head01.inc'; ?>
+<?php require 'templates/app/inc_head01.inc'; ?>
 </head>
 <body onload="cleanOnLoad()">
-<?php require 'templates/inc_head02.inc'; ?>
+<?php require 'templates/app/inc_head02.inc'; ?>
 <!-- place the tree building script where you'd like in the body -->
 <script>
 
@@ -28,9 +28,9 @@ function abrirJanelaFilho(file,window) {
 
 /*Choose current leaf - must be done before create tree*/
 var currentLeaf = 'Despesas';
-<?php require 'templates/inc_tree.inc'; ?>
+<?php require 'templates/gestor/inc_tree_gestor.inc'; ?>
 </script>
-<?php require 'templates/inc_head03.inc'; ?>
+<?php require 'templates/app/inc_head03.inc'; ?>
 <!-- .................................................................................................................................. -->
 <?php
 if ((isset($_SESSION["msg"])) && !(strcmp($_SESSION["msg"], "") == 0)) {
@@ -46,7 +46,7 @@ if ((isset($_SESSION["idcondominio"]) == 0)) {
 
 $_SESSION["msg"] = "";
 require 'dataHandler/Despesa_DataHandler.php';
-require 'templates/inc_db.inc';
+require 'templates/app/inc_db.inc';
 ?>
 <h2>Pesquisa de despesa</h2>
 <form name="mainform" action="Despesa_Pesquisa.php" method="GET">
@@ -144,6 +144,6 @@ if (!empty($fornecedor) or !empty($datafatura) or !empty($datalimitepagamento) o
 }
 ?>
 <!-- .................................................................................................................................. -->	
-<?php require 'templates/inc_head04.inc'; ?>
+<?php require 'templates/app/inc_head04.inc'; ?>
 </body>
 </html>

@@ -27,7 +27,7 @@ if (!isset($_SESSION["tipoUtilizador"]) || strcmp($_SESSION["tipoUtilizador"], "
 <h3>LOV rubricas de orçamento</h3>
 <?php
 require 'dataHandler/Despesa_DataHandler.php';
-require 'templates/inc_db.inc';
+require 'templates/app/inc_db.inc';
 $idrubricaorcamento = filter_input(INPUT_GET, 'idrubricaorcamento', FILTER_SANITIZE_SPECIAL_CHARS);
 $despesadatahandler = new Despesa_DataHandler($dbHostName, $dbDatabaseName, $dbUsername, $dbPassword);
 $despesadatahandler->buildListaRubricaOrcamentoLOV($idrubricaorcamento);

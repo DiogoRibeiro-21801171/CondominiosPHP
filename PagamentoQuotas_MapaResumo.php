@@ -10,18 +10,18 @@ if (!isset($_SESSION["tipoUtilizador"]) || strcmp($_SESSION["tipoUtilizador"], "
 <html lang="pt">
 <head>
 <title>Mapa resumo de pagamentos</title>
-<?php require 'templates/inc_head01.inc'; ?>
+<?php require 'templates/app/inc_head01.inc'; ?>
 </head>
 <body onload="cleanOnLoad()">
-<?php require 'templates/inc_head02.inc'; ?>
+<?php require 'templates/app/inc_head02.inc'; ?>
 <!-- place the tree building script where you'd like in the body -->
 <script>
 /*Choose current leaf - must be done before create tree*/
 var currentLeaf = 'Mapa quotas';
-<?php require 'templates/inc_tree.inc'; ?>
+<?php require 'templates/gestor/inc_tree_gestor.inc'; ?>
 showBranch('branch025000000');
 </script>
-<?php require 'templates/inc_head03.inc'; ?>
+<?php require 'templates/app/inc_head03.inc'; ?>
 <!-- .................................................................................................................................. -->
 <h2>Mapa de pagamentos de quotas no ano</h2>
 
@@ -54,7 +54,7 @@ $_SESSION["msg"] = "";
 <hr>
 <?php
 require 'dataHandler/Quota_DataHandler.php';
-require 'templates/inc_db.inc';
+require 'templates/app/inc_db.inc';
 if (!empty($ano)) {
     $quota="Normal";
     $quotadatahandler = new Quota_DataHandler($dbHostName, $dbDatabaseName, $dbUsername, $dbPassword);
@@ -63,6 +63,6 @@ if (!empty($ano)) {
 }
 ?>
 <!-- .................................................................................................................................. -->	
-<?php require 'templates/inc_head04.inc'; ?>
+<?php require 'templates/app/inc_head04.inc'; ?>
 </body>
 </html>

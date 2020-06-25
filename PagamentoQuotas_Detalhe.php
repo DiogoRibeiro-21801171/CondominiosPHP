@@ -10,18 +10,18 @@ if (!isset($_SESSION["tipoUtilizador"]) || strcmp($_SESSION["tipoUtilizador"], "
 <html lang="pt">
 <head>
 <title>Pesquisa de pagamento</title>
-<?php require 'templates/inc_head01.inc'; ?>
+<?php require 'templates/app/inc_head01.inc'; ?>
 </head>
 <body onload="cleanOnLoad()">
-<?php require 'templates/inc_head02.inc'; ?>
+<?php require 'templates/app/inc_head02.inc'; ?>
 <!-- place the tree building script where you'd like in the body -->
 <script>
 /*Choose current leaf - must be done before create tree*/
 var currentLeaf = 'Detalhes quotas';
-<?php require 'templates/inc_tree.inc'; ?>
+<?php require 'templates/gestor/inc_tree_gestor.inc'; ?>
 showBranch('branch025000000');
 </script>
-<?php require 'templates/inc_head03.inc'; ?>
+<?php require 'templates/app/inc_head03.inc'; ?>
 <!-- .................................................................................................................................. -->
 <?php
 if ((isset($_SESSION["msg"])) && !(strcmp($_SESSION["msg"], "") == 0)) {
@@ -69,13 +69,13 @@ $_SESSION["msg"] = "";
 
 <?php
 require 'dataHandler/Quota_DataHandler.php';
-require 'templates/inc_db.inc';
+require 'templates/app/inc_db.inc';
 if (!empty($ano) or !empty($idfracao)) {
     $quotadatahandler = new Quota_DataHandler($dbHostName, $dbDatabaseName, $dbUsername, $dbPassword);
     $quotadatahandler->pesquisaPagamentoQuotas($idcondominio, $idfracao, $ano);
 }
 ?>
 <!-- .................................................................................................................................. -->	
-<?php require 'templates/inc_head04.inc'; ?>
+<?php require 'templates/app/inc_head04.inc'; ?>
 </body>
 </html>
