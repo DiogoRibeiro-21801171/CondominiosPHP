@@ -32,7 +32,7 @@ class UtilizadorAplicacao_DataHandler {
         //este tipo de query evita SQL Injetion porque a instrução é compilada antes de receber os parâmetros reais, que depois só podem ser usados naquele ponto
         // $query = "select perfil, idcondominio, nome, genero from utilizador_aplicacao where login=? and pwd=password(?) and estado='ATIVO'";
         $query =    "select ua.idperfilutilizador, " .
-                    "       convert(aes_decrypt(unhex(ua.nome),UNHEX(SHA2('6LrRjvPFaE8YP8yMsyxKcL',512))) using utf8) as nome, " .
+                    "       convert(aes_decrypt(unhex(ua.nome),UNHEX(SHA2('6LrRjvPFaE8YP8yMsyxKcL',512))) using utf8mb4) as nome, " .
                     "       ua.genero, " .
                     "       ua.idcondominio, " .
                     "       c.morada, " .
@@ -40,7 +40,8 @@ class UtilizadorAplicacao_DataHandler {
                     "from utilizadoraplicacao as ua " .
                     "inner join condominio as c on c.idcondominio=ua.idcondominio " .
                     "where login = hex(aes_encrypt(?,UNHEX(SHA2('6LrRjvPFaE8YP8yMsyxKcL',512)))) " .
-                    "and pwd=password(?) " .
+                    "and pwd=CONCAT('*', UPPER(SHA1(UNHEX(SHA1(?))))) " .
+            //"and pwd=password(?) " .
                     "and ua.idestadoutilizador='ATIVO' ";
 
         $stmt = mysqli_stmt_init($this->connection);
