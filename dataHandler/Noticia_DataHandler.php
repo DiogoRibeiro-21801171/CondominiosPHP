@@ -75,13 +75,13 @@ class Noticia_DataHandler {
         print ("</tr>");
         // Conteudo, data, noticia
         while (mysqli_stmt_fetch($stmt)) {
-            print ("<tr>\n");
+            print ("<tr id='$idnoticia'>\n");
             printf("
-                <td >%s</td>
-                <td >%s</td>
+                <td data-target='data'>%s</td>
+                <td data-target='noticia'>%s</td>
                 <td >
-                <a title='Editar Noticia' data-toggle='modal' data-target='#editarNoticia'><span class='glyphicon glyphicon-pencil'></span></a>
-                <a title='Eliminar Noticia' data-toggle='modal' data-target='#eliminarNoticia'><span class='glyphicon glyphicon-trash'></span></a>
+                <a id='editarNoticia' title='Editar Noticia' data-toggle='modal' data-target='#editarNoticiaModal' data-role='editar' data-id='$idnoticia'><span class='glyphicon glyphicon-pencil'></span></a>
+                <a id='eliminarNoticia' title='Eliminar Noticia' data-toggle='modal' data-target='#eliminarNoticiaModal' data-role='editar' data-id='$idnoticia'><span class='glyphicon glyphicon-trash'></span></a>
                 </td>\n",
                 $data, $noticia);
             print ("</tr>\n");
@@ -90,7 +90,7 @@ class Noticia_DataHandler {
 
         print ("
             <!-- Apagar Noticia -->
-            <div class=\"modal fade\" id=\"eliminarNoticia\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"eliminarNoticiaLabel\" aria-hidden=\"true\">
+            <div class=\"modal fade\" id=\"eliminarNoticiaModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"eliminarNoticiaLabel\" aria-hidden=\"true\">
                 <div class=\"modal-dialog\" role=\"document\">
                     <div class=\"modal-content\">
                         <div class=\"modal-header\">
@@ -104,7 +104,7 @@ class Noticia_DataHandler {
                         </div>
                         <div class=\"modal-footer\">
                             <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Cancelar</button>
-                            <button onclick='' type=\"button\" class=\"btn btn-danger\" value='eliminar'>Eliminar</button>
+                            <button onclick='' type=\"submit\" class=\"btn btn-danger\" value='eliminar'>Eliminar</button>
                         </div>
                     </div>
                 </div>
@@ -113,7 +113,7 @@ class Noticia_DataHandler {
 
         print ("
             <!-- Editar Noticia -->
-            <div class=\"modal fade\" id=\"editarNoticia\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"editarNoticiaLabel\" aria-hidden=\"true\">
+            <div class=\"modal fade\" id=\"editarNoticiaModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"editarNoticiaLabel\" aria-hidden=\"true\">
                 <div class=\"modal-dialog\" role=\"document\">
                     <div class=\"modal-content\">
                         <div class=\"modal-header\">

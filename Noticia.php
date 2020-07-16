@@ -26,7 +26,6 @@ var currentLeaf = 'Noticias';
     <h2>Noticias</h2>
     <a class="btn btn-success pull-right" data-toggle="modal" data-target="#">Criar Noticia</a>
 
-
 </div>
 
 <?php
@@ -44,9 +43,23 @@ require 'templates/app/inc_db.inc';
 $noticiadatahandler = new Noticia_DataHandler($dbHostName, $dbDatabaseName, $dbUsername, $dbPassword);
 $noticiadatahandler->listaNoticias($idcondominio);
 
-
 ?>
 <!-- .................................................................................................................................. -->	
 <?php require 'templates/app/inc_head04.inc'; ?>
+
+<script>
+    $(document).ready(function () {
+        $(document).on('click', 'a[data-role=update]', function () {
+            var id = $(this).data('id');
+            var data = $('#' + id).children('td[data-target= data]').text;
+            var noticia = $('#' + id).children('td[data-target= noticia]').text;
+
+            $('#data').val(data);
+            $('#noticia').val(noticia);
+            $('#editarNoticia').val('toggle');
+
+        })
+    })
+</script>
 </body>
 </html>
