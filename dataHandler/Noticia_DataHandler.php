@@ -80,13 +80,68 @@ class Noticia_DataHandler {
                 <td >%s</td>
                 <td >%s</td>
                 <td >
-                <a title='Editar Noticia' data-toggle='tooltip'><span class='glyphicon glyphicon-pencil'></span></a>
-                <a onclick='' title='Eliminar Noticia' data-toggle='modal' data-target='#eliminarNoticia'><span class='glyphicon glyphicon-trash'></span></a>
+                <a title='Editar Noticia' data-toggle='modal' data-target='#editarNoticia'><span class='glyphicon glyphicon-pencil'></span></a>
+                <a title='Eliminar Noticia' data-toggle='modal' data-target='#eliminarNoticia'><span class='glyphicon glyphicon-trash'></span></a>
                 </td>\n",
                 $data, $noticia);
             print ("</tr>\n");
         }
         print ("</table>\n");
+
+        print ("
+            <!-- Apagar Noticia -->
+            <div class=\"modal fade\" id=\"eliminarNoticia\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"eliminarNoticiaLabel\" aria-hidden=\"true\">
+                <div class=\"modal-dialog\" role=\"document\">
+                    <div class=\"modal-content\">
+                        <div class=\"modal-header\">
+                            <h5 class=\"modal-title\" id=\"eliminarNoticiaLabel\">Eliminar Noticia</h5>
+                            <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Fechar\">
+                                <span aria-hidden=\"true\">&times;</span>
+                            </button>
+                        </div>
+                        <div class=\"modal-body\">
+                            Pretende eliminar esta noticia?
+                        </div>
+                        <div class=\"modal-footer\">
+                            <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Cancelar</button>
+                            <button onclick='' type=\"button\" class=\"btn btn-danger\" value='eliminar'>Eliminar</button>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        ");
+
+        print ("
+            <!-- Editar Noticia -->
+            <div class=\"modal fade\" id=\"editarNoticia\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"editarNoticiaLabel\" aria-hidden=\"true\">
+                <div class=\"modal-dialog\" role=\"document\">
+                    <div class=\"modal-content\">
+                        <div class=\"modal-header\">
+                            <h5 class=\"modal-title\" id=\"editarNoticiaLabel\">Editar Noticia</h5>
+                            <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Fechar\">
+                                <span aria-hidden=\"true\">&times;</span>
+                            </button>
+                        </div>
+                        <div class=\"modal-body\">
+                            <form action=\"../Noticia.php\" method=\"POST\">
+                                <div class=\"form-group\">
+                                    <label>Data:</label>
+                                    <input type= 'date' name='data' value='$data'>
+                                </div>
+                                <div class=\"form-group\">
+                                    <label>Noticia:</label>
+                                    <textarea rows=\"3\" cols='70'>$noticia</textarea>
+                                </div>
+                            </form>
+                        </div>
+                        <div class=\"modal-footer\">
+                            <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Cancelar</button>
+                            <button type=\"submit\" class=\"btn btn-danger\">Submeter</button>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        ");
 
         /* close statement */
         mysqli_stmt_close($stmt);
