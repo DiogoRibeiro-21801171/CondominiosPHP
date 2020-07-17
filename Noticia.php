@@ -92,10 +92,10 @@ $noticiadatahandler->listaNoticias($idcondominio);
         <?php
 
         $stmt = $noticiadatahandler->stmt;
-        $query = "DELETE FROM noticia where idnoticia=" . "<script type=\"text/JavaScript\"> noticiaAEliminar() </script>";
+        $query = "DELETE FROM noticia where idnoticia=" . "<script type=\"text/JavaScript\"> noticiaAEliminar(); </script>";
 
         if (!mysqli_stmt_prepare($stmt, $query)) {
-            print '<div class="msgErro">Erro na preparacao do prepared statement</div>';
+            print '<div class="alert alert-danger" role="alert">Erro na preparacao do prepared statement</div>';
             return;
         }
         //"s" significa uma variavel do tipo string. Se fosse uma string e um int seria "si"
