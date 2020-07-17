@@ -46,5 +46,27 @@ $userdatahandler->listaUsers($idcondominio);
 
 <!-- .................................................................................................................................. -->
 <?php require '../../templates/app/inc_head04.inc'; ?>
+<script>
+    function apagarUser(idcondominio, login) {
+        <?php
+        $stmt = $userdatahandler->stmt;
+        $query = "delete from utilizadoraplicacao where idcondominio = ? and login = ?;";
+
+        if (!mysqli_stmt_prepare($stmt, $query)) {
+            print '<div class="msgErro">Erro na preparacao do prepared statement</div>';
+            return;
+        }
+        //"s" significa uma variavel do tipo string. Se fosse uma string e um int seria "si"
+        mysqli_stmt_bind_param($stmt, "ss", $idcondominio, $login);
+        mysqli_stmt_execute($stmt);
+
+        if (mysqli_stmt_error($stmt) != "") {
+            print '<div class="msgErro">Erro na execução do SQL: ' . mysqli_stmt_error($stmt) . '</div>';
+            //print '<div class="msgErro">Erro na execução do SQL: ' . '</div>';
+            return;
+        }
+        ?>
+    }
+</script>
 </body>
 </html>

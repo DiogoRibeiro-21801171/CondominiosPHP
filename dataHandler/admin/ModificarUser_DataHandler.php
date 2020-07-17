@@ -2,6 +2,8 @@
 class ModificarUser_DataHandler {
 
     private $connection;
+    public $stmt;
+
     //------------------------------------------------------------------------------------
 
     function __construct($hostName, $databaseName, $username, $password) {
@@ -31,9 +33,6 @@ class ModificarUser_DataHandler {
     }
 
     //------------------------------------------------------------------------------------
-
-    function apagarUser() {}
-
     function listaUsers($idcondominio) {
 
         $query = "select 
@@ -42,22 +41,22 @@ class ModificarUser_DataHandler {
                     idperfilutilizador
                 from utilizadoraplicacao where idcondominio = ?;";
 
-        $stmt = mysqli_stmt_init($this->connection);
+        $this->stmt = mysqli_stmt_init($this->connection);
 
-        if (!mysqli_stmt_prepare($stmt, $query)) {
+        if (!mysqli_stmt_prepare($this->stmt, $query)) {
             print '<div class="msgErro">Erro na preparacao do prepared statement</div>';
             return;
         }
         //"s" significa uma variavel do tipo string. Se fosse uma string e um int seria "si"
-        mysqli_stmt_bind_param($stmt, "s", $idcondominio);
-        mysqli_stmt_execute($stmt);
+        mysqli_stmt_bind_param($this->stmt, "s", $idcondominio);
+        mysqli_stmt_execute($this->stmt);
 
-        if (mysqli_stmt_error($stmt) != "") {
-            print '<div class="msgErro">Erro na execução do SQL: ' . mysqli_stmt_error($stmt) . '</div>';
+        if (mysqli_stmt_error($this->stmt) != "") {
+            print '<div class="msgErro">Erro na execução do SQL: ' . mysqli_stmt_error($this->stmt) . '</div>';
             //print '<div class="msgErro">Erro na execução do SQL: ' . '</div>';
             return;
         }
-        mysqli_stmt_bind_result($stmt, $nome, $login, $idperfilutilizador);
+        mysqli_stmt_bind_result($this->stmt, $nome, $login, $idperfilutilizador);
         /* transportar os valores */
         /* nas expressões abaixo é mais rápido fazer print ('<table>\n'); mas neste caso o PHP não vai interpretar \n como fim de linha */
         /* quando colocamos print("<table>\n"); o PHP faz uma análise ao argumento e deteta o fim de linha */
@@ -84,7 +83,7 @@ class ModificarUser_DataHandler {
         \n");
         print ("</tr>");
         // Conteudo, data, Utilizador
-        while (mysqli_stmt_fetch($stmt)) {
+        while (mysqli_stmt_fetch($this->stmt)) {
             print ("<tr id='$login'>\n");
             printf("
                 <td data-target='utilizador'>%s</td>
@@ -115,7 +114,7 @@ class ModificarUser_DataHandler {
                         </div>
                         <div class=\"modal-footer\">
                             <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Cancelar</button>
-                            <button onclick='' type=\"submit\" class=\"btn btn-primary\">Submeter</button>
+                            <button type=\"submit\" class=\"btn btn-primary\">Submeter</button>
                         </div>
                     </div>
                 </div>
@@ -138,7 +137,7 @@ class ModificarUser_DataHandler {
                         </div>
                         <div class=\"modal-footer\">
                             <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Cancelar</button>
-                            <button onclick='' type=\"submit\" class=\"btn btn-danger\" value='eliminar'>Eliminar</button>
+                            <button onclick='apagarUser($idcondominio, $login)' data-toggle='toogle' type=\"submit\" class=\"btn btn-danger\">Eliminar</button>
                         </div>
                     </div>
                 </div>
@@ -164,7 +163,7 @@ class ModificarUser_DataHandler {
                                 </div>
                                 <div class=\"form-group\">
                                     <label>Perfil:</label>
-                                    <input type= 'text' name='utilizador' value='$idperfilutilizador'>
+                                    <input type= 'text' name='perfilutilizador' value='$idperfilutilizador'>
                                 </div>
                             </form>
                         </div>
@@ -178,7 +177,7 @@ class ModificarUser_DataHandler {
         ");
 
         /* close statement */
-        mysqli_stmt_close($stmt);
+        mysqli_stmt_close($this->stmt);
         mysqli_close($this->connection);
     }
 
