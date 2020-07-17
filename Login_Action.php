@@ -64,6 +64,10 @@ if (empty($loginUsername)) {
             $_SESSION["tipoUtilizador"] = "CONDOMINO";
             header('Location:PaginaInicial.php');
             exit();
+        } else if (strcmp($tipoUtilizador, "NORMAL") == 0) {
+                $_SESSION["tipoUtilizador"] = "NORMAL";
+                header('Location:PaginaInicial.php');
+                exit();
         } else {
             $_SESSION["tipoUtilizador"] = "";
             $_SESSION["msg"] = $tipoUtilizador;

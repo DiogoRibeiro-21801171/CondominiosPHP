@@ -24,7 +24,7 @@ var currentLeaf = 'Noticias';
 <!-- .................................................................................................................................. -->
 <div class="clearfix">
     <h2>Noticias</h2>
-    <a class="btn btn-success pull-right" data-toggle="modal" data-target="#">Criar Noticia</a>
+    <a class="btn btn-success pull-right" data-toggle="modal" data-target="#criarNoticiaModal">Criar Noticia</a>
 
 </div>
 
@@ -48,18 +48,70 @@ $noticiadatahandler->listaNoticias($idcondominio);
 <?php require 'templates/app/inc_head04.inc'; ?>
 
 <script>
-    $(document).ready(function () {
-        $(document).on('click', 'a[data-role=update]', function () {
-            var id = $(this).data('id');
-            var data = $('#' + id).children('td[data-target= data]').text;
-            var noticia = $('#' + id).children('td[data-target= noticia]').text;
 
-            $('#data').val(data);
-            $('#noticia').val(noticia);
-            $('#editarNoticia').val('toggle');
+    function noticiaAEliminar() {
+        $(document).ready(function () {
+            $(document).on('click', 'a[data-role=eliminar]', function () {
+                return $(this).data('id')
+            })
+        });
+    }
 
-        })
-    })
+    function noticiaAEditar() {
+        $(document).ready(function () {
+            $(document).on('click', 'a[data-role=editar]', function () {
+                return $(this).data('id')
+            })
+        });
+    }
+
+    function criarNoticia(idcondominio, login) {
+        <?php
+            /*
+        $stmt = $noticiadatahandler->stmt;
+        $query = "INSERT INTO noticia(idcondominio, data, noticia) VALUES (?, ?, ?);";
+
+        if (!mysqli_stmt_prepare($stmt, $query)) {
+            print '<div class="msgErro">Erro na preparacao do prepared statement</div>';
+            return;
+        }
+        //"s" significa uma variavel do tipo string. Se fosse uma string e um int seria "si"
+        mysqli_stmt_bind_param($stmt, "ss", $idcondominio, $data, $noticia);
+        mysqli_stmt_execute($stmt);
+
+        if (mysqli_stmt_error($stmt) != "") {
+            print '<div class="msgErro">Erro na execução do SQL: ' . mysqli_stmt_error($stmt) . '</div>';
+            //print '<div class="msgErro">Erro na execução do SQL: ' . '</div>';
+            return;
+        }
+          */
+        ?>
+    }
+
+    function apagarNoticia() {
+        <?php
+
+        $stmt = $noticiadatahandler->stmt;
+        $query = "DELETE FROM noticia where idnoticia=" . "<script type=\"text/JavaScript\"> noticiaAEliminar() </script>";
+
+        if (!mysqli_stmt_prepare($stmt, $query)) {
+            print '<div class="msgErro">Erro na preparacao do prepared statement</div>';
+            return;
+        }
+        //"s" significa uma variavel do tipo string. Se fosse uma string e um int seria "si"
+        mysqli_stmt_bind_param($stmt, "s", $idnoticia);
+        mysqli_stmt_execute($stmt);
+
+        if (mysqli_stmt_error($stmt) != "") {
+            print '<div class="msgErro">Erro na execução do SQL: ' . mysqli_stmt_error($stmt) . '</div>';
+            //print '<div class="msgErro">Erro na execução do SQL: ' . '</div>';
+            return;
+        }
+
+        ?>
+
+    }
+
 </script>
 </body>
 </html>

@@ -2,6 +2,7 @@
 class Noticia_DataHandler {
 
     private $connection;
+    public $stmt;
     //------------------------------------------------------------------------------------
 
     function __construct($hostName, $databaseName, $username, $password) {
@@ -36,22 +37,22 @@ class Noticia_DataHandler {
 
         $query = "select data, noticia, idnoticia from noticia where idcondominio = ? order by data desc";
 
-        $stmt = mysqli_stmt_init($this->connection);
+        $this->stmt = mysqli_stmt_init($this->connection);
 
-        if (!mysqli_stmt_prepare($stmt, $query)) {
+        if (!mysqli_stmt_prepare($this->stmt, $query)) {
             print '<div class="msgErro">Erro na preparacao do prepared statement</div>';
             return;
         }
         //"s" significa uma variavel do tipo string. Se fosse uma string e um int seria "si"
-        mysqli_stmt_bind_param($stmt, "s",$idcondominio);
-        mysqli_stmt_execute($stmt);
+        mysqli_stmt_bind_param($this->stmt, "s",$idcondominio);
+        mysqli_stmt_execute($this->stmt);
 
-        if (mysqli_stmt_error($stmt) != "") {
-            print '<div class="msgErro">Erro na execução do SQL: ' . mysqli_stmt_error($stmt) . '</div>';
+        if (mysqli_stmt_error($this->stmt) != "") {
+            print '<div class="msgErro">Erro na execução do SQL: ' . mysqli_stmt_error($this->stmt) . '</div>';
             //print '<div class="msgErro">Erro na execução do SQL: ' . '</div>';
             return;
         }
-        mysqli_stmt_bind_result($stmt, $data, $noticia, $idnoticia);
+        mysqli_stmt_bind_result($this->stmt, $data, $noticia, $idnoticia);
         /* transportar os valores */
         /* nas expressões abaixo é mais rápido fazer print ('<table>\n'); mas neste caso o PHP não vai interpretar \n como fim de linha */
         /* quando colocamos print("<table>\n"); o PHP faz uma análise ao argumento e deteta o fim de linha */
@@ -74,19 +75,50 @@ class Noticia_DataHandler {
         \n");
         print ("</tr>");
         // Conteudo, data, noticia
-        while (mysqli_stmt_fetch($stmt)) {
+        while (mysqli_stmt_fetch($this->stmt)) {
             print ("<tr id='$idnoticia'>\n");
             printf("
                 <td data-target='data'>%s</td>
                 <td data-target='noticia'>%s</td>
                 <td >
                 <a id='editarNoticia' title='Editar Noticia' data-toggle='modal' data-target='#editarNoticiaModal' data-role='editar' data-id='$idnoticia'><span class='glyphicon glyphicon-pencil'></span></a>
-                <a id='eliminarNoticia' title='Eliminar Noticia' data-toggle='modal' data-target='#eliminarNoticiaModal' data-role='editar' data-id='$idnoticia'><span class='glyphicon glyphicon-trash'></span></a>
+                <a id='eliminarNoticia' title='Eliminar Noticia' data-toggle='modal' data-target='#eliminarNoticiaModal' data-role='eliminar' data-id='$idnoticia'><span class='glyphicon glyphicon-trash'></span></a>
                 </td>\n",
                 $data, $noticia);
             print ("</tr>\n");
         }
         print ("</table>\n");
+
+        print ("
+            <!-- Criar Noticia -->
+            <div class=\"modal fade\" id=\"criarNoticiaModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"criarNoticiaLabel\" aria-hidden=\"true\">
+                <div class=\"modal-dialog\" role=\"document\">
+                    <div class=\"modal-content\">
+                        <div class=\"modal-header\">
+                            <h5 class=\"modal-title\" id=\"criarNoticiaLabel\">Criar Noticia</h5>
+                            <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Fechar\">
+                                <span aria-hidden=\"true\">&times;</span>
+                            </button>
+                        </div>
+                        <div class=\"modal-body\">
+                            <div class='form-group'>
+                                    <label>Data:</label>
+                                    <input type= 'date' name='data'>
+                                </div>
+                                <div class=\"form - group\">
+                                    <label>Noticia:</label>
+                                    <textarea rows=\"3\" cols='70'></textarea>
+                                </div>
+                        </div>
+                        <div class=\"modal-footer\">
+                            <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Cancelar</button>
+                            <button onclick='' type=\"submit\" class=\"btn btn-danger\">Submeter</button>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        ");
+
 
         print ("
             <!-- Apagar Noticia -->
@@ -104,7 +136,7 @@ class Noticia_DataHandler {
                         </div>
                         <div class=\"modal-footer\">
                             <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Cancelar</button>
-                            <button onclick='' type=\"submit\" class=\"btn btn-danger\" value='eliminar'>Eliminar</button>
+                            <button onclick='apagarNoticia()' type=\"submit\" data-toggle='toogle' class=\"btn btn-danger\">Eliminar</button>
                         </div>
                     </div>
                 </div>
@@ -144,7 +176,7 @@ class Noticia_DataHandler {
         ");
 
         /* close statement */
-        mysqli_stmt_close($stmt);
+        mysqli_stmt_close($this->stmt);
         mysqli_close($this->connection);
     }
 
