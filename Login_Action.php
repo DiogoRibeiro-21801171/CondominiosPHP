@@ -51,22 +51,24 @@ if (empty($loginUsername)) {
         $_SESSION["morada"] = $morada;
         $_SESSION["ultimaatualizacao"] = $ultimaatualizacao;
         
-        
+
         if (strcmp($tipoUtilizador, "ADMINISTRADOR") == 0) {
             $_SESSION["tipoUtilizador"] = "ADMINISTRADOR";
+            header('Location:data/admin/PaginaInical_admin.php');
+            exit();
+        } else if (strcmp($tipoUtilizador, "GESTOR") == 0) {
+            $_SESSION["tipoUtilizador"] = "GESTOR";
+            header('Location:PaginaInicial.php');
+            exit();
+        } else if (strcmp($tipoUtilizador, "CONDOMINO") == 0) {
+            $_SESSION["tipoUtilizador"] = "CONDOMINO";
             header('Location:PaginaInicial.php');
             exit();
         } else {
-            if (strcmp($tipoUtilizador, "NORMAL") == 0) {
-                $_SESSION["tipoUtilizador"] = "NORMAL";
-                header('Location:PaginaInicial.php');
-                exit();
-            } else {
-                $_SESSION["tipoUtilizador"] = "";
-                $_SESSION["msg"] = $tipoUtilizador;
-                header('Location: Login.php');
-                exit();
-            }
+            $_SESSION["tipoUtilizador"] = "";
+            $_SESSION["msg"] = $tipoUtilizador;
+            header('Location: Login.php');
+            exit();
         }
     }
 }
